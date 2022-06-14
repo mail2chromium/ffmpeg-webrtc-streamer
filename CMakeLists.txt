@@ -78,6 +78,8 @@ include_directories(
         "/usr/include/pulse/"
 
         "${CMAKE_SOURCE_DIR}/ffmpeg"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/x264/ffmpeg_build"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/x264/ffmpeg_build/include"
 
         "${CMAKE_SOURCE_DIR}/webrtc/src"
         "${CMAKE_SOURCE_DIR}/webrtc/src/media"
@@ -1894,7 +1896,7 @@ target_compile_definitions(avdevice PRIVATE DBUILDING_avdevice)
 add_library(libx264 STATIC IMPORTED)
 set_target_properties(libx264 PROPERTIES IMPORTED_LOCATION
         #        /home/webrtc/x264/libx264.a
-        ${CMAKE_SOURCE_DIR}/ffmpeg/x264/lib/libx264.a
+        ${CMAKE_SOURCE_DIR}/ffmpeg/x264/ffmpeg_build/lib/libx264.a
         )
 
 add_library(webrtc_linux STATIC IMPORTED)
@@ -1922,7 +1924,8 @@ target_link_libraries(ffmpeg
 #        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p
         )
 
-target_link_libraries(ffmpeg webrtc_linux libx264
+target_link_libraries(ffmpeg webrtc_linux 
+        libx264
         -lx264
         -lfdk-aac
         -lm
