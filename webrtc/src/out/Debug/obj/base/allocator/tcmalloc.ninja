@@ -1,0 +1,39 @@
+defines = -DNO_HEAP_CHECK -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DTCMALLOC_USE_DOUBLYLINKED_FREELIST -DTCMALLOC_DISABLE_HUGE_ALLOCATIONS -DTCMALLOC_DONT_REPLACE_SYSTEM_ALLOC
+include_dirs = -I../../base/allocator -I../../third_party/tcmalloc/chromium/src/base -I../../third_party/tcmalloc/chromium/src -I../.. -Igen
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -Wno-sign-compare -Wno-unused-result -O2 -fno-ident -fdata-sections -ffunction-sections
+cflags_cc = -std=gnu++14 -fno-exceptions --sysroot=../../build/linux/debian_sid_amd64-sysroot -fvisibility-inlines-hidden -Wno-narrowing -Wno-class-memaccess
+label_name = tcmalloc
+target_out_dir = obj/base/allocator
+target_output_name = tcmalloc
+
+build obj/base/allocator/tcmalloc/abort.o: cxx ../../third_party/tcmalloc/chromium/src/base/abort.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/atomicops-internals-x86.o: cxx ../../third_party/tcmalloc/chromium/src/base/atomicops-internals-x86.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/elf_mem_image.o: cxx ../../third_party/tcmalloc/chromium/src/base/elf_mem_image.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/linuxthreads.o: cxx ../../third_party/tcmalloc/chromium/src/base/linuxthreads.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/logging.o: cxx ../../third_party/tcmalloc/chromium/src/base/logging.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/low_level_alloc.o: cxx ../../third_party/tcmalloc/chromium/src/base/low_level_alloc.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/spinlock.o: cxx ../../third_party/tcmalloc/chromium/src/base/spinlock.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/spinlock_internal.o: cxx ../../third_party/tcmalloc/chromium/src/base/spinlock_internal.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/sysinfo.o: cxx ../../third_party/tcmalloc/chromium/src/base/sysinfo.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/vdso_support.o: cxx ../../third_party/tcmalloc/chromium/src/base/vdso_support.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/central_freelist.o: cxx ../../third_party/tcmalloc/chromium/src/central_freelist.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/common.o: cxx ../../third_party/tcmalloc/chromium/src/common.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/fake_stacktrace_scope.o: cxx ../../third_party/tcmalloc/chromium/src/fake_stacktrace_scope.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/free_list.o: cxx ../../third_party/tcmalloc/chromium/src/free_list.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/internal_logging.o: cxx ../../third_party/tcmalloc/chromium/src/internal_logging.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/malloc_extension.o: cxx ../../third_party/tcmalloc/chromium/src/malloc_extension.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/malloc_hook.o: cxx ../../third_party/tcmalloc/chromium/src/malloc_hook.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/maybe_threads.o: cxx ../../third_party/tcmalloc/chromium/src/maybe_threads.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/page_heap.o: cxx ../../third_party/tcmalloc/chromium/src/page_heap.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/raw_printer.o: cxx ../../third_party/tcmalloc/chromium/src/raw_printer.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/sampler.o: cxx ../../third_party/tcmalloc/chromium/src/sampler.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/span.o: cxx ../../third_party/tcmalloc/chromium/src/span.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/stack_trace_table.o: cxx ../../third_party/tcmalloc/chromium/src/stack_trace_table.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/stacktrace.o: cxx ../../third_party/tcmalloc/chromium/src/stacktrace.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/static_vars.o: cxx ../../third_party/tcmalloc/chromium/src/static_vars.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/symbolize.o: cxx ../../third_party/tcmalloc/chromium/src/symbolize.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/system-alloc.o: cxx ../../third_party/tcmalloc/chromium/src/system-alloc.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/thread_cache.o: cxx ../../third_party/tcmalloc/chromium/src/thread_cache.cc || obj/base/allocator/buildflags.stamp
+build obj/base/allocator/tcmalloc/debugallocation_shim.o: cxx ../../base/allocator/debugallocation_shim.cc || obj/base/allocator/buildflags.stamp
+
+build obj/base/allocator/tcmalloc.stamp: stamp obj/base/allocator/tcmalloc/abort.o obj/base/allocator/tcmalloc/atomicops-internals-x86.o obj/base/allocator/tcmalloc/elf_mem_image.o obj/base/allocator/tcmalloc/linuxthreads.o obj/base/allocator/tcmalloc/logging.o obj/base/allocator/tcmalloc/low_level_alloc.o obj/base/allocator/tcmalloc/spinlock.o obj/base/allocator/tcmalloc/spinlock_internal.o obj/base/allocator/tcmalloc/sysinfo.o obj/base/allocator/tcmalloc/vdso_support.o obj/base/allocator/tcmalloc/central_freelist.o obj/base/allocator/tcmalloc/common.o obj/base/allocator/tcmalloc/fake_stacktrace_scope.o obj/base/allocator/tcmalloc/free_list.o obj/base/allocator/tcmalloc/internal_logging.o obj/base/allocator/tcmalloc/malloc_extension.o obj/base/allocator/tcmalloc/malloc_hook.o obj/base/allocator/tcmalloc/maybe_threads.o obj/base/allocator/tcmalloc/page_heap.o obj/base/allocator/tcmalloc/raw_printer.o obj/base/allocator/tcmalloc/sampler.o obj/base/allocator/tcmalloc/span.o obj/base/allocator/tcmalloc/stack_trace_table.o obj/base/allocator/tcmalloc/stacktrace.o obj/base/allocator/tcmalloc/static_vars.o obj/base/allocator/tcmalloc/symbolize.o obj/base/allocator/tcmalloc/system-alloc.o obj/base/allocator/tcmalloc/thread_cache.o obj/base/allocator/tcmalloc/debugallocation_shim.o || obj/base/allocator/buildflags.stamp obj/base/third_party/dynamic_annotations/libdynamic_annotations.a

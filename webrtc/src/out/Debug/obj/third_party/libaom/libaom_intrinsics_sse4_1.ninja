@@ -1,0 +1,38 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/libaom/source/config -I../../third_party/libaom/source/config/linux/x64 -I../../third_party/libaom/source/libaom
+cflags = -msse4.1 -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = libaom_intrinsics_sse4_1
+target_out_dir = obj/third_party/libaom
+target_output_name = libaom_intrinsics_sse4_1
+
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/cdef_block_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/cdef_block_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_convolve_horiz_rs_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/av1_convolve_horiz_rs_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_convolve_scale_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/av1_convolve_scale_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_txfm_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/av1_txfm_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/filterintra_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/filterintra_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_convolve_2d_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/highbd_convolve_2d_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_inv_txfm_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/highbd_inv_txfm_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_jnt_convolve_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/highbd_jnt_convolve_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_warp_plane_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/highbd_warp_plane_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/intra_edge_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/intra_edge_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/reconinter_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/reconinter_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/selfguided_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/selfguided_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/warp_plane_sse4.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/warp_plane_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/blend_a64_hmask_sse4.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/blend_a64_hmask_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/blend_a64_mask_sse4.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/blend_a64_mask_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/blend_a64_vmask_sse4.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/blend_a64_vmask_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_fwd_txfm1d_sse4.o: cc ../../third_party/libaom/source/libaom/av1/encoder/x86/av1_fwd_txfm1d_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_fwd_txfm2d_sse4.o: cc ../../third_party/libaom/source/libaom/av1/encoder/x86/av1_fwd_txfm2d_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_highbd_quantize_sse4.o: cc ../../third_party/libaom/source/libaom/av1/encoder/x86/av1_highbd_quantize_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/corner_match_sse4.o: cc ../../third_party/libaom/source/libaom/av1/encoder/x86/corner_match_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/encodetxb_sse4.o: cc ../../third_party/libaom/source/libaom/av1/encoder/x86/encodetxb_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_fwd_txfm_sse4.o: cc ../../third_party/libaom/source/libaom/av1/encoder/x86/highbd_fwd_txfm_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/rdopt_sse4.o: cc ../../third_party/libaom/source/libaom/av1/encoder/x86/rdopt_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/pickrst_sse4.o: cc ../../third_party/libaom/source/libaom/av1/encoder/x86/pickrst_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_variance_sse4.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/highbd_variance_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/sse_sse4.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/sse_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/obmc_sad_sse4.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/obmc_sad_sse4.c
+build obj/third_party/libaom/libaom_intrinsics_sse4_1/obmc_variance_sse4.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/obmc_variance_sse4.c
+
+build obj/third_party/libaom/libaom_intrinsics_sse4_1.stamp: stamp obj/third_party/libaom/libaom_intrinsics_sse4_1/cdef_block_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_convolve_horiz_rs_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_convolve_scale_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_txfm_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/filterintra_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_convolve_2d_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_inv_txfm_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_jnt_convolve_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_warp_plane_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/intra_edge_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/reconinter_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/selfguided_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/warp_plane_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/blend_a64_hmask_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/blend_a64_mask_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/blend_a64_vmask_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_fwd_txfm1d_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_fwd_txfm2d_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/av1_highbd_quantize_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/corner_match_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/encodetxb_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_fwd_txfm_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/rdopt_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/pickrst_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/highbd_variance_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/sse_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/obmc_sad_sse4.o obj/third_party/libaom/libaom_intrinsics_sse4_1/obmc_variance_sse4.o

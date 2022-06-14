@@ -1,0 +1,8 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DFT_CONFIG_CONFIG_H=\"freetype-custom-config/ftconfig.h\" -DFT_CONFIG_MODULES_H=\"freetype-custom-config/ftmodule.h\" -DFT_CONFIG_OPTIONS_H=\"freetype-custom-config/ftoption.h\" -DPDFIUM_REQUIRED_MODULES -DCHROMIUM_RESTRICT_VISIBILITY
+include_dirs = -I../.. -Igen -I../../third_party/freetype/include -I../../third_party/freetype/src/include -I../../third_party/harfbuzz-ng/src/src
+label_name = hb_scoped_util
+target_out_dir = obj/third_party/harfbuzz-ng
+target_output_name = hb_scoped_util
+
+
+build obj/third_party/harfbuzz-ng/hb_scoped_util.stamp: stamp || obj/third_party/freetype_harfbuzz.stamp obj/third_party/freetype/freetype_source.stamp obj/third_party/libpng/libpng_sources.stamp obj/third_party/zlib/libchrome_zlib.a obj/third_party/zlib/zlib_adler32_simd.stamp obj/third_party/zlib/zlib_inflate_chunk_simd.stamp obj/third_party/zlib/zlib_crc32_simd.stamp obj/third_party/zlib/zlib_x86_simd.stamp obj/third_party/harfbuzz-ng/harfbuzz_source.stamp obj/third_party/icu/libicuuc.a

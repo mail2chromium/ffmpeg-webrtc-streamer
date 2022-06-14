@@ -1,0 +1,11 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/abseil-cpp
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter
+cflags_cc = -std=gnu++14 -fno-exceptions --sysroot=../../build/linux/debian_sid_amd64-sysroot -fvisibility-inlines-hidden -Wno-narrowing -Wno-class-memaccess
+label_name = int128
+target_out_dir = obj/third_party/abseil-cpp/absl/numeric
+target_output_name = int128
+
+build obj/third_party/abseil-cpp/absl/numeric/int128/int128.o: cxx ../../third_party/abseil-cpp/absl/numeric/int128.cc
+
+build obj/third_party/abseil-cpp/absl/numeric/int128.stamp: stamp obj/third_party/abseil-cpp/absl/numeric/int128/int128.o || obj/third_party/abseil-cpp/absl/base/config.stamp obj/third_party/abseil-cpp/absl/base/core_headers.stamp

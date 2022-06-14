@@ -1,0 +1,12 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DZLIB_IMPLEMENTATION -DCRC32_SIMD_SSE42_PCLMUL -DDEFLATE_FILL_WINDOW_SSE2
+include_dirs = -I../.. -Igen
+cflags = -msse4.2 -mpclmul -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -Wall -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = zlib_x86_simd
+target_out_dir = obj/third_party/zlib
+target_output_name = zlib_x86_simd
+
+build obj/third_party/zlib/zlib_x86_simd/crc_folding.o: cc ../../third_party/zlib/crc_folding.c
+build obj/third_party/zlib/zlib_x86_simd/fill_window_sse.o: cc ../../third_party/zlib/fill_window_sse.c
+
+build obj/third_party/zlib/zlib_x86_simd.stamp: stamp obj/third_party/zlib/zlib_x86_simd/crc_folding.o obj/third_party/zlib/zlib_x86_simd/fill_window_sse.o

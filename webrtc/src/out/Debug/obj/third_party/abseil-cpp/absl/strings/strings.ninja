@@ -1,0 +1,23 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/abseil-cpp
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter
+cflags_cc = -std=gnu++14 -fno-exceptions --sysroot=../../build/linux/debian_sid_amd64-sysroot -fvisibility-inlines-hidden -Wno-narrowing -Wno-class-memaccess
+label_name = strings
+target_out_dir = obj/third_party/abseil-cpp/absl/strings
+target_output_name = strings
+
+build obj/third_party/abseil-cpp/absl/strings/strings/ascii.o: cxx ../../third_party/abseil-cpp/absl/strings/ascii.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/charconv.o: cxx ../../third_party/abseil-cpp/absl/strings/charconv.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/escaping.o: cxx ../../third_party/abseil-cpp/absl/strings/escaping.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/charconv_bigint.o: cxx ../../third_party/abseil-cpp/absl/strings/internal/charconv_bigint.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/charconv_parse.o: cxx ../../third_party/abseil-cpp/absl/strings/internal/charconv_parse.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/memutil.o: cxx ../../third_party/abseil-cpp/absl/strings/internal/memutil.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/match.o: cxx ../../third_party/abseil-cpp/absl/strings/match.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/numbers.o: cxx ../../third_party/abseil-cpp/absl/strings/numbers.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/str_cat.o: cxx ../../third_party/abseil-cpp/absl/strings/str_cat.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/str_replace.o: cxx ../../third_party/abseil-cpp/absl/strings/str_replace.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/str_split.o: cxx ../../third_party/abseil-cpp/absl/strings/str_split.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/string_view.o: cxx ../../third_party/abseil-cpp/absl/strings/string_view.cc
+build obj/third_party/abseil-cpp/absl/strings/strings/substitute.o: cxx ../../third_party/abseil-cpp/absl/strings/substitute.cc
+
+build obj/third_party/abseil-cpp/absl/strings/strings.stamp: stamp obj/third_party/abseil-cpp/absl/strings/strings/ascii.o obj/third_party/abseil-cpp/absl/strings/strings/charconv.o obj/third_party/abseil-cpp/absl/strings/strings/escaping.o obj/third_party/abseil-cpp/absl/strings/strings/charconv_bigint.o obj/third_party/abseil-cpp/absl/strings/strings/charconv_parse.o obj/third_party/abseil-cpp/absl/strings/strings/memutil.o obj/third_party/abseil-cpp/absl/strings/strings/match.o obj/third_party/abseil-cpp/absl/strings/strings/numbers.o obj/third_party/abseil-cpp/absl/strings/strings/str_cat.o obj/third_party/abseil-cpp/absl/strings/strings/str_replace.o obj/third_party/abseil-cpp/absl/strings/strings/str_split.o obj/third_party/abseil-cpp/absl/strings/strings/string_view.o obj/third_party/abseil-cpp/absl/strings/strings/substitute.o || obj/third_party/abseil-cpp/absl/strings/internal.stamp obj/third_party/abseil-cpp/absl/base/base.stamp obj/third_party/abseil-cpp/absl/base/bits.stamp obj/third_party/abseil-cpp/absl/base/config.stamp obj/third_party/abseil-cpp/absl/base/core_headers.stamp obj/third_party/abseil-cpp/absl/base/endian.stamp obj/third_party/abseil-cpp/absl/base/raw_logging_internal.stamp obj/third_party/abseil-cpp/absl/base/throw_delegate.stamp obj/third_party/abseil-cpp/absl/memory/memory.stamp obj/third_party/abseil-cpp/absl/meta/type_traits.stamp obj/third_party/abseil-cpp/absl/numeric/int128.stamp obj/third_party/abseil-cpp/absl/base/atomic_hook.stamp obj/third_party/abseil-cpp/absl/base/log_severity.stamp obj/third_party/abseil-cpp/absl/base/base_internal.stamp obj/third_party/abseil-cpp/absl/base/dynamic_annotations.stamp obj/third_party/abseil-cpp/absl/base/spinlock_wait.stamp obj/third_party/abseil-cpp/absl/base/errno_saver.stamp

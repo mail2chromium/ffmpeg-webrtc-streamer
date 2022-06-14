@@ -1,0 +1,8 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/abseil-cpp
+label_name = fixed_array
+target_out_dir = obj/third_party/abseil-cpp/absl/container
+target_output_name = fixed_array
+
+
+build obj/third_party/abseil-cpp/absl/container/fixed_array.stamp: stamp || obj/third_party/abseil-cpp/absl/container/compressed_tuple.stamp obj/third_party/abseil-cpp/absl/algorithm/algorithm.stamp obj/third_party/abseil-cpp/absl/base/core_headers.stamp obj/third_party/abseil-cpp/absl/base/dynamic_annotations.stamp obj/third_party/abseil-cpp/absl/base/throw_delegate.stamp obj/third_party/abseil-cpp/absl/memory/memory.stamp obj/third_party/abseil-cpp/absl/utility/utility.stamp obj/third_party/abseil-cpp/absl/base/base_internal.stamp obj/third_party/abseil-cpp/absl/base/config.stamp obj/third_party/abseil-cpp/absl/meta/type_traits.stamp obj/third_party/abseil-cpp/absl/base/raw_logging_internal.stamp obj/third_party/abseil-cpp/absl/base/atomic_hook.stamp obj/third_party/abseil-cpp/absl/base/log_severity.stamp

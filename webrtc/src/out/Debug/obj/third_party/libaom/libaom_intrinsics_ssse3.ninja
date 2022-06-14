@@ -1,0 +1,27 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/libaom/source/config -I../../third_party/libaom/source/config/linux/x64 -I../../third_party/libaom/source/libaom
+cflags = -mssse3 -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = libaom_intrinsics_ssse3
+target_out_dir = obj/third_party/libaom
+target_output_name = libaom_intrinsics_ssse3
+
+build obj/third_party/libaom/libaom_intrinsics_ssse3/cdef_block_ssse3.o: cc ../../third_party/libaom/source/libaom/av1/common/cdef_block_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/av1_inv_txfm_ssse3.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/av1_inv_txfm_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/cfl_ssse3.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/cfl_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/highbd_convolve_2d_ssse3.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/highbd_convolve_2d_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/highbd_wiener_convolve_ssse3.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/highbd_wiener_convolve_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/jnt_convolve_ssse3.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/jnt_convolve_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/reconinter_ssse3.o: cc ../../third_party/libaom/source/libaom/av1/common/x86/reconinter_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/aom_subpixel_8t_intrin_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/aom_subpixel_8t_intrin_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/highbd_convolve_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/highbd_convolve_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/intrapred_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/intrapred_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/masked_sad_intrin_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/masked_sad_intrin_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/masked_sad4d_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/masked_sad4d_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/masked_variance_intrin_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/masked_variance_intrin_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/quantize_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/quantize_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/variance_impl_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/variance_impl_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/jnt_variance_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/jnt_variance_ssse3.c
+build obj/third_party/libaom/libaom_intrinsics_ssse3/jnt_sad_ssse3.o: cc ../../third_party/libaom/source/libaom/aom_dsp/x86/jnt_sad_ssse3.c
+
+build obj/third_party/libaom/libaom_intrinsics_ssse3.stamp: stamp obj/third_party/libaom/libaom_intrinsics_ssse3/cdef_block_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/av1_inv_txfm_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/cfl_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/highbd_convolve_2d_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/highbd_wiener_convolve_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/jnt_convolve_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/reconinter_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/aom_subpixel_8t_intrin_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/highbd_convolve_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/intrapred_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/masked_sad_intrin_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/masked_sad4d_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/masked_variance_intrin_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/quantize_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/variance_impl_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/jnt_variance_ssse3.o obj/third_party/libaom/libaom_intrinsics_ssse3/jnt_sad_ssse3.o

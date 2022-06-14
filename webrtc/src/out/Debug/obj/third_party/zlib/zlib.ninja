@@ -1,0 +1,28 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DZLIB_IMPLEMENTATION -DADLER32_SIMD_SSSE3 -DX86_NOT_WINDOWS -DINFLATE_CHUNK_SIMD_SSE2 -DINFLATE_CHUNK_READ_64LE -DCRC32_SIMD_SSE42_PCLMUL -DCRC32_SIMD_SSE42_PCLMUL -DDEFLATE_FILL_WINDOW_SSE2
+include_dirs = -I../.. -Igen -I../../third_party/zlib
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = zlib
+target_out_dir = obj/third_party/zlib
+target_output_name = libchrome_zlib
+
+build obj/third_party/zlib/zlib/adler32.o: cc ../../third_party/zlib/adler32.c
+build obj/third_party/zlib/zlib/compress.o: cc ../../third_party/zlib/compress.c
+build obj/third_party/zlib/zlib/cpu_features.o: cc ../../third_party/zlib/cpu_features.c
+build obj/third_party/zlib/zlib/crc32.o: cc ../../third_party/zlib/crc32.c
+build obj/third_party/zlib/zlib/deflate.o: cc ../../third_party/zlib/deflate.c
+build obj/third_party/zlib/zlib/gzclose.o: cc ../../third_party/zlib/gzclose.c
+build obj/third_party/zlib/zlib/gzlib.o: cc ../../third_party/zlib/gzlib.c
+build obj/third_party/zlib/zlib/gzread.o: cc ../../third_party/zlib/gzread.c
+build obj/third_party/zlib/zlib/gzwrite.o: cc ../../third_party/zlib/gzwrite.c
+build obj/third_party/zlib/zlib/infback.o: cc ../../third_party/zlib/infback.c
+build obj/third_party/zlib/zlib/inffast.o: cc ../../third_party/zlib/inffast.c
+build obj/third_party/zlib/zlib/inftrees.o: cc ../../third_party/zlib/inftrees.c
+build obj/third_party/zlib/zlib/trees.o: cc ../../third_party/zlib/trees.c
+build obj/third_party/zlib/zlib/uncompr.o: cc ../../third_party/zlib/uncompr.c
+build obj/third_party/zlib/zlib/zutil.o: cc ../../third_party/zlib/zutil.c
+
+build obj/third_party/zlib/libchrome_zlib.a: alink obj/third_party/zlib/zlib/adler32.o obj/third_party/zlib/zlib/compress.o obj/third_party/zlib/zlib/cpu_features.o obj/third_party/zlib/zlib/crc32.o obj/third_party/zlib/zlib/deflate.o obj/third_party/zlib/zlib/gzclose.o obj/third_party/zlib/zlib/gzlib.o obj/third_party/zlib/zlib/gzread.o obj/third_party/zlib/zlib/gzwrite.o obj/third_party/zlib/zlib/infback.o obj/third_party/zlib/zlib/inffast.o obj/third_party/zlib/zlib/inftrees.o obj/third_party/zlib/zlib/trees.o obj/third_party/zlib/zlib/uncompr.o obj/third_party/zlib/zlib/zutil.o || obj/third_party/zlib/zlib_adler32_simd.stamp obj/third_party/zlib/zlib_inflate_chunk_simd.stamp obj/third_party/zlib/zlib_crc32_simd.stamp obj/third_party/zlib/zlib_x86_simd.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/zlib

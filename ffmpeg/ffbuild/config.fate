@@ -1,0 +1,1 @@
+config:c:x86_64:generic:linux:gcc 7 (Ubuntu 7.5.0-3ubuntu1~18.04):--enable-gpl --enable-libfdk_aac --enable-libx264 --enable-nonfree --disable-asm --enable-libpulse --enable-indev=pulse --enable-outdev=pulse --enable-shared

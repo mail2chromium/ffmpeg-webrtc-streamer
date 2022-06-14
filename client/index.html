@@ -1,0 +1,113 @@
+<!--
+HTML index for the example client.
+
+Name: Muhammad Usman
+Email: mail2ch.usman@gmail.com
+ -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Example Client</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body style="background-color: #f6f6f6;">
+    <div class="container">
+      <div class="text-center pt-2 pb-2">
+        <h1 class="text-primary">WebRTC Video Streamer Client</h1>
+      </div>
+      <div class="row">
+        <input style="display: none" type="checkbox" id="usehttps" />
+        <div class="col-sm-1 align-self-end text-right">
+          <label>Host:</label>
+        </div>
+        <div class="col-md-4">
+          <input class="form-control" type="text" id="hostname" />
+        </div>
+
+        <div class="col-sm-1 align-self-end text-right">
+          <label>Port:</label>
+        </div>
+        <div class="col-md-4">
+          <input class="form-control" type="text" id="port" />
+        </div>
+        <div class="col align-self-end">
+          <button class="btn btn-primary" onclick="onBtnConnectClick()">
+            Connect
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <label id="response" /> -->
+
+    <!-- <div class="messagebox">
+      <label for="message"
+        >Enter a message:
+        <input
+          type="text"
+          name="message"
+          id="message"
+          placeholder="Message text"
+          inputmode="latin"
+          size="60"
+          maxlength="120"
+        />
+      </label>
+      <button id="sendButton" name="sendButton" class="buttonright">
+        Send
+      </button>
+    </div>
+    <div class="messagebox" id="receivebox">
+      <p>Messages received:</p>
+    </div>
+
+    <div class="messagebox" id="receiveMsg">
+      <p>sample text</p>
+    </div> -->
+<div class="container">
+  <div class="right-section text-center   pt-5  pl-1 pr-1  pb-1 ">
+    <video class="right-video w-75" id="remotevideo" autoplay controls></video>
+  </div>
+</div>
+   
+
+    <script>
+      var $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      window.onload = onLoad();
+
+      function onLoad() {
+        $("hostname").value = localStorage.getItem("hostname");
+        $("port").value = localStorage.getItem("port");
+        let checked = localStorage.getItem("usehttps");
+        $("usehttps").checked = checked === "true" ? true : false;
+      }
+
+      function onBtnConnectClick() {
+        let hostname = $("hostname").value;
+        let port = $("port").value;
+        let usehttps = $("usehttps").checked;
+        localStorage.setItem("hostname", $("hostname").value);
+        localStorage.setItem("port", $("port").value);
+        localStorage.setItem("usehttps", $("usehttps").checked);
+        connect(hostname, port, usehttps);
+      }
+    </script>
+    <script src="example-client.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

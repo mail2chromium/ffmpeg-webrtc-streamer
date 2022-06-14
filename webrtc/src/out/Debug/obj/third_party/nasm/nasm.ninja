@@ -1,0 +1,95 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DHAVE_CONFIG_H
+include_dirs = -I../.. -Igen -I../../third_party/nasm -I../../third_party/nasm/asm -I../../third_party/nasm/disasm -I../../third_party/nasm/include -I../../third_party/nasm/output -I../../third_party/nasm/x86
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = nasm
+target_out_dir = obj/third_party/nasm
+target_output_name = nasm
+
+build obj/third_party/nasm/nasm/assemble.o: cc ../../third_party/nasm/asm/assemble.c
+build obj/third_party/nasm/nasm/directbl.o: cc ../../third_party/nasm/asm/directbl.c
+build obj/third_party/nasm/nasm/directiv.o: cc ../../third_party/nasm/asm/directiv.c
+build obj/third_party/nasm/nasm/error.o: cc ../../third_party/nasm/asm/error.c
+build obj/third_party/nasm/nasm/eval.o: cc ../../third_party/nasm/asm/eval.c
+build obj/third_party/nasm/nasm/exprdump.o: cc ../../third_party/nasm/asm/exprdump.c
+build obj/third_party/nasm/nasm/exprlib.o: cc ../../third_party/nasm/asm/exprlib.c
+build obj/third_party/nasm/nasm/float.o: cc ../../third_party/nasm/asm/float.c
+build obj/third_party/nasm/nasm/labels.o: cc ../../third_party/nasm/asm/labels.c
+build obj/third_party/nasm/nasm/listing.o: cc ../../third_party/nasm/asm/listing.c
+build obj/third_party/nasm/nasm/parser.o: cc ../../third_party/nasm/asm/parser.c
+build obj/third_party/nasm/nasm/pptok.o: cc ../../third_party/nasm/asm/pptok.c
+build obj/third_party/nasm/nasm/pragma.o: cc ../../third_party/nasm/asm/pragma.c
+build obj/third_party/nasm/nasm/preproc-nop.o: cc ../../third_party/nasm/asm/preproc-nop.c
+build obj/third_party/nasm/nasm/preproc.o: cc ../../third_party/nasm/asm/preproc.c
+build obj/third_party/nasm/nasm/quote.o: cc ../../third_party/nasm/asm/quote.c
+build obj/third_party/nasm/nasm/rdstrnum.o: cc ../../third_party/nasm/asm/rdstrnum.c
+build obj/third_party/nasm/nasm/segalloc.o: cc ../../third_party/nasm/asm/segalloc.c
+build obj/third_party/nasm/nasm/stdscan.o: cc ../../third_party/nasm/asm/stdscan.c
+build obj/third_party/nasm/nasm/strfunc.o: cc ../../third_party/nasm/asm/strfunc.c
+build obj/third_party/nasm/nasm/tokhash.o: cc ../../third_party/nasm/asm/tokhash.c
+build obj/third_party/nasm/nasm/common.o: cc ../../third_party/nasm/common/common.c
+build obj/third_party/nasm/nasm/disasm.o: cc ../../third_party/nasm/disasm/disasm.c
+build obj/third_party/nasm/nasm/sync.o: cc ../../third_party/nasm/disasm/sync.c
+build obj/third_party/nasm/nasm/macros.o: cc ../../third_party/nasm/macros/macros.c
+build obj/third_party/nasm/nasm/badenum.o: cc ../../third_party/nasm/nasmlib/badenum.c
+build obj/third_party/nasm/nasm/bsi.o: cc ../../third_party/nasm/nasmlib/bsi.c
+build obj/third_party/nasm/nasm/crc64.o: cc ../../third_party/nasm/nasmlib/crc64.c
+build obj/third_party/nasm/nasm/file.o: cc ../../third_party/nasm/nasmlib/file.c
+build obj/third_party/nasm/nasm/filename.o: cc ../../third_party/nasm/nasmlib/filename.c
+build obj/third_party/nasm/nasm/hashtbl.o: cc ../../third_party/nasm/nasmlib/hashtbl.c
+build obj/third_party/nasm/nasm/ilog2.o: cc ../../third_party/nasm/nasmlib/ilog2.c
+build obj/third_party/nasm/nasm/malloc.o: cc ../../third_party/nasm/nasmlib/malloc.c
+build obj/third_party/nasm/nasm/md5c.o: cc ../../third_party/nasm/nasmlib/md5c.c
+build obj/third_party/nasm/nasm/mmap.o: cc ../../third_party/nasm/nasmlib/mmap.c
+build obj/third_party/nasm/nasm/path.o: cc ../../third_party/nasm/nasmlib/path.c
+build obj/third_party/nasm/nasm/perfhash.o: cc ../../third_party/nasm/nasmlib/perfhash.c
+build obj/third_party/nasm/nasm/raa.o: cc ../../third_party/nasm/nasmlib/raa.c
+build obj/third_party/nasm/nasm/rbtree.o: cc ../../third_party/nasm/nasmlib/rbtree.c
+build obj/third_party/nasm/nasm/readnum.o: cc ../../third_party/nasm/nasmlib/readnum.c
+build obj/third_party/nasm/nasm/realpath.o: cc ../../third_party/nasm/nasmlib/realpath.c
+build obj/third_party/nasm/nasm/saa.o: cc ../../third_party/nasm/nasmlib/saa.c
+build obj/third_party/nasm/nasm/srcfile.o: cc ../../third_party/nasm/nasmlib/srcfile.c
+build obj/third_party/nasm/nasm/string.o: cc ../../third_party/nasm/nasmlib/string.c
+build obj/third_party/nasm/nasm/strlist.o: cc ../../third_party/nasm/nasmlib/strlist.c
+build obj/third_party/nasm/nasm/ver.o: cc ../../third_party/nasm/nasmlib/ver.c
+build obj/third_party/nasm/nasm/zerobuf.o: cc ../../third_party/nasm/nasmlib/zerobuf.c
+build obj/third_party/nasm/nasm/codeview.o: cc ../../third_party/nasm/output/codeview.c
+build obj/third_party/nasm/nasm/legacy.o: cc ../../third_party/nasm/output/legacy.c
+build obj/third_party/nasm/nasm/nulldbg.o: cc ../../third_party/nasm/output/nulldbg.c
+build obj/third_party/nasm/nasm/nullout.o: cc ../../third_party/nasm/output/nullout.c
+build obj/third_party/nasm/nasm/outaout.o: cc ../../third_party/nasm/output/outaout.c
+build obj/third_party/nasm/nasm/outas86.o: cc ../../third_party/nasm/output/outas86.c
+build obj/third_party/nasm/nasm/outbin.o: cc ../../third_party/nasm/output/outbin.c
+build obj/third_party/nasm/nasm/outcoff.o: cc ../../third_party/nasm/output/outcoff.c
+build obj/third_party/nasm/nasm/outdbg.o: cc ../../third_party/nasm/output/outdbg.c
+build obj/third_party/nasm/nasm/outelf.o: cc ../../third_party/nasm/output/outelf.c
+build obj/third_party/nasm/nasm/outform.o: cc ../../third_party/nasm/output/outform.c
+build obj/third_party/nasm/nasm/outieee.o: cc ../../third_party/nasm/output/outieee.c
+build obj/third_party/nasm/nasm/outlib.o: cc ../../third_party/nasm/output/outlib.c
+build obj/third_party/nasm/nasm/outmacho.o: cc ../../third_party/nasm/output/outmacho.c
+build obj/third_party/nasm/nasm/outobj.o: cc ../../third_party/nasm/output/outobj.c
+build obj/third_party/nasm/nasm/outrdf2.o: cc ../../third_party/nasm/output/outrdf2.c
+build obj/third_party/nasm/nasm/strtbl.o: cc ../../third_party/nasm/output/strtbl.c
+build obj/third_party/nasm/nasm/snprintf.o: cc ../../third_party/nasm/stdlib/snprintf.c
+build obj/third_party/nasm/nasm/strlcpy.o: cc ../../third_party/nasm/stdlib/strlcpy.c
+build obj/third_party/nasm/nasm/strnlen.o: cc ../../third_party/nasm/stdlib/strnlen.c
+build obj/third_party/nasm/nasm/strrchrnul.o: cc ../../third_party/nasm/stdlib/strrchrnul.c
+build obj/third_party/nasm/nasm/vsnprintf.o: cc ../../third_party/nasm/stdlib/vsnprintf.c
+build obj/third_party/nasm/nasm/disp8.o: cc ../../third_party/nasm/x86/disp8.c
+build obj/third_party/nasm/nasm/iflag.o: cc ../../third_party/nasm/x86/iflag.c
+build obj/third_party/nasm/nasm/insnsa.o: cc ../../third_party/nasm/x86/insnsa.c
+build obj/third_party/nasm/nasm/insnsb.o: cc ../../third_party/nasm/x86/insnsb.c
+build obj/third_party/nasm/nasm/insnsd.o: cc ../../third_party/nasm/x86/insnsd.c
+build obj/third_party/nasm/nasm/insnsn.o: cc ../../third_party/nasm/x86/insnsn.c
+build obj/third_party/nasm/nasm/regdis.o: cc ../../third_party/nasm/x86/regdis.c
+build obj/third_party/nasm/nasm/regflags.o: cc ../../third_party/nasm/x86/regflags.c
+build obj/third_party/nasm/nasm/regs.o: cc ../../third_party/nasm/x86/regs.c
+build obj/third_party/nasm/nasm/regvals.o: cc ../../third_party/nasm/x86/regvals.c
+build obj/third_party/nasm/nasm/nasm.o: cc ../../third_party/nasm/asm/nasm.c
+
+build ./nasm: link obj/third_party/nasm/nasm/assemble.o obj/third_party/nasm/nasm/directbl.o obj/third_party/nasm/nasm/directiv.o obj/third_party/nasm/nasm/error.o obj/third_party/nasm/nasm/eval.o obj/third_party/nasm/nasm/exprdump.o obj/third_party/nasm/nasm/exprlib.o obj/third_party/nasm/nasm/float.o obj/third_party/nasm/nasm/labels.o obj/third_party/nasm/nasm/listing.o obj/third_party/nasm/nasm/parser.o obj/third_party/nasm/nasm/pptok.o obj/third_party/nasm/nasm/pragma.o obj/third_party/nasm/nasm/preproc-nop.o obj/third_party/nasm/nasm/preproc.o obj/third_party/nasm/nasm/quote.o obj/third_party/nasm/nasm/rdstrnum.o obj/third_party/nasm/nasm/segalloc.o obj/third_party/nasm/nasm/stdscan.o obj/third_party/nasm/nasm/strfunc.o obj/third_party/nasm/nasm/tokhash.o obj/third_party/nasm/nasm/common.o obj/third_party/nasm/nasm/disasm.o obj/third_party/nasm/nasm/sync.o obj/third_party/nasm/nasm/macros.o obj/third_party/nasm/nasm/badenum.o obj/third_party/nasm/nasm/bsi.o obj/third_party/nasm/nasm/crc64.o obj/third_party/nasm/nasm/file.o obj/third_party/nasm/nasm/filename.o obj/third_party/nasm/nasm/hashtbl.o obj/third_party/nasm/nasm/ilog2.o obj/third_party/nasm/nasm/malloc.o obj/third_party/nasm/nasm/md5c.o obj/third_party/nasm/nasm/mmap.o obj/third_party/nasm/nasm/path.o obj/third_party/nasm/nasm/perfhash.o obj/third_party/nasm/nasm/raa.o obj/third_party/nasm/nasm/rbtree.o obj/third_party/nasm/nasm/readnum.o obj/third_party/nasm/nasm/realpath.o obj/third_party/nasm/nasm/saa.o obj/third_party/nasm/nasm/srcfile.o obj/third_party/nasm/nasm/string.o obj/third_party/nasm/nasm/strlist.o obj/third_party/nasm/nasm/ver.o obj/third_party/nasm/nasm/zerobuf.o obj/third_party/nasm/nasm/codeview.o obj/third_party/nasm/nasm/legacy.o obj/third_party/nasm/nasm/nulldbg.o obj/third_party/nasm/nasm/nullout.o obj/third_party/nasm/nasm/outaout.o obj/third_party/nasm/nasm/outas86.o obj/third_party/nasm/nasm/outbin.o obj/third_party/nasm/nasm/outcoff.o obj/third_party/nasm/nasm/outdbg.o obj/third_party/nasm/nasm/outelf.o obj/third_party/nasm/nasm/outform.o obj/third_party/nasm/nasm/outieee.o obj/third_party/nasm/nasm/outlib.o obj/third_party/nasm/nasm/outmacho.o obj/third_party/nasm/nasm/outobj.o obj/third_party/nasm/nasm/outrdf2.o obj/third_party/nasm/nasm/strtbl.o obj/third_party/nasm/nasm/snprintf.o obj/third_party/nasm/nasm/strlcpy.o obj/third_party/nasm/nasm/strnlen.o obj/third_party/nasm/nasm/strrchrnul.o obj/third_party/nasm/nasm/vsnprintf.o obj/third_party/nasm/nasm/disp8.o obj/third_party/nasm/nasm/iflag.o obj/third_party/nasm/nasm/insnsa.o obj/third_party/nasm/nasm/insnsb.o obj/third_party/nasm/nasm/insnsd.o obj/third_party/nasm/nasm/insnsn.o obj/third_party/nasm/nasm/regdis.o obj/third_party/nasm/nasm/regflags.o obj/third_party/nasm/nasm/regs.o obj/third_party/nasm/nasm/regvals.o obj/third_party/nasm/nasm/nasm.o || obj/build/win/default_exe_manifest.stamp obj/build/config/executable_deps.stamp
+  ldflags = -Wl,--fatal-warnings -fPIC -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,-z,defs -Wl,--as-needed -fuse-ld=gold -Wl,--threads -Wl,--thread-count=4 -m64 -Wl,-O2 -Wl,--gc-sections -rdynamic --sysroot=../../build/linux/debian_sid_amd64-sysroot -L../../build/linux/debian_sid_amd64-sysroot/usr/local/lib/x86_64-linux-gnu -L../../build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -L../../build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -pie -Wl,--disable-new-dtags
+  libs = -latomic -ldl -lpthread -lrt
+  frameworks =
+  output_extension = 
+  output_dir = .

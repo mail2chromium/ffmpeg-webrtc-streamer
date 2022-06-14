@@ -1,0 +1,11 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen
+label_name = openh264_common_asm
+target_out_dir = obj/third_party/openh264
+target_output_name = libopenh264_common_asm
+
+
+build obj/third_party/openh264/libopenh264_common_asm.a: alink obj/third_party/openh264/openh264_common_asm/asm_inc.o obj/third_party/openh264/openh264_common_asm/cpuid.o obj/third_party/openh264/openh264_common_asm/dct.o obj/third_party/openh264/openh264_common_asm/deblock.o obj/third_party/openh264/openh264_common_asm/expand_picture.o obj/third_party/openh264/openh264_common_asm/intra_pred_com.o obj/third_party/openh264/openh264_common_asm/mb_copy.o obj/third_party/openh264/openh264_common_asm/mc_chroma.o obj/third_party/openh264/openh264_common_asm/mc_luma.o obj/third_party/openh264/openh264_common_asm/satd_sad.o obj/third_party/openh264/openh264_common_asm/vaa.o || obj/third_party/openh264/openh264_common_asm_action.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/openh264

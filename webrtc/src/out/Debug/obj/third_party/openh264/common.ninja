@@ -1,0 +1,26 @@
+defines = -DX86_ASM -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../../third_party/openh264/src/codec/api/svc -I../../third_party/openh264/src/codec/common/arm -I../../third_party/openh264/src/codec/common/inc -I../../third_party/openh264/src/codec/common/src -I../../third_party/openh264/src/codec/common/x86 -I../.. -Igen
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -Wno-format -Wno-format-security -Wno-header-hygiene -Wno-unused-function -Wno-unused-value
+cflags_cc = -std=gnu++14 -fno-exceptions --sysroot=../../build/linux/debian_sid_amd64-sysroot -fvisibility-inlines-hidden -Wno-narrowing -Wno-class-memaccess
+label_name = common
+target_out_dir = obj/third_party/openh264
+target_output_name = common
+
+build obj/third_party/openh264/common/WelsTaskThread.o: cxx ../../third_party/openh264/src/codec/common/src/WelsTaskThread.cpp
+build obj/third_party/openh264/common/WelsThread.o: cxx ../../third_party/openh264/src/codec/common/src/WelsThread.cpp
+build obj/third_party/openh264/common/WelsThreadLib.o: cxx ../../third_party/openh264/src/codec/common/src/WelsThreadLib.cpp
+build obj/third_party/openh264/common/WelsThreadPool.o: cxx ../../third_party/openh264/src/codec/common/src/WelsThreadPool.cpp
+build obj/third_party/openh264/common/common_tables.o: cxx ../../third_party/openh264/src/codec/common/src/common_tables.cpp
+build obj/third_party/openh264/common/copy_mb.o: cxx ../../third_party/openh264/src/codec/common/src/copy_mb.cpp
+build obj/third_party/openh264/common/cpu.o: cxx ../../third_party/openh264/src/codec/common/src/cpu.cpp
+build obj/third_party/openh264/common/crt_util_safe_x.o: cxx ../../third_party/openh264/src/codec/common/src/crt_util_safe_x.cpp
+build obj/third_party/openh264/common/deblocking_common.o: cxx ../../third_party/openh264/src/codec/common/src/deblocking_common.cpp
+build obj/third_party/openh264/common/expand_pic.o: cxx ../../third_party/openh264/src/codec/common/src/expand_pic.cpp
+build obj/third_party/openh264/common/intra_pred_common.o: cxx ../../third_party/openh264/src/codec/common/src/intra_pred_common.cpp
+build obj/third_party/openh264/common/mc.o: cxx ../../third_party/openh264/src/codec/common/src/mc.cpp
+build obj/third_party/openh264/common/memory_align.o: cxx ../../third_party/openh264/src/codec/common/src/memory_align.cpp
+build obj/third_party/openh264/common/sad_common.o: cxx ../../third_party/openh264/src/codec/common/src/sad_common.cpp
+build obj/third_party/openh264/common/utils.o: cxx ../../third_party/openh264/src/codec/common/src/utils.cpp
+build obj/third_party/openh264/common/welsCodecTrace.o: cxx ../../third_party/openh264/src/codec/common/src/welsCodecTrace.cpp
+
+build obj/third_party/openh264/common.stamp: stamp obj/third_party/openh264/common/WelsTaskThread.o obj/third_party/openh264/common/WelsThread.o obj/third_party/openh264/common/WelsThreadLib.o obj/third_party/openh264/common/WelsThreadPool.o obj/third_party/openh264/common/common_tables.o obj/third_party/openh264/common/copy_mb.o obj/third_party/openh264/common/cpu.o obj/third_party/openh264/common/crt_util_safe_x.o obj/third_party/openh264/common/deblocking_common.o obj/third_party/openh264/common/expand_pic.o obj/third_party/openh264/common/intra_pred_common.o obj/third_party/openh264/common/mc.o obj/third_party/openh264/common/memory_align.o obj/third_party/openh264/common/sad_common.o obj/third_party/openh264/common/utils.o obj/third_party/openh264/common/welsCodecTrace.o || obj/third_party/openh264/libopenh264_common_asm.a

@@ -1,0 +1,38 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/libvpx/source/config -I../../third_party/libvpx/source/config/linux/x64 -I../../third_party/libvpx/source/libvpx
+cflags = -msse2 -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -Wno-unused-function -Wno-sign-compare
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = libvpx_intrinsics_sse2
+target_out_dir = obj/third_party/libvpx
+target_output_name = libvpx_intrinsics_sse2
+
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/bilinear_filter_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp8/common/x86/bilinear_filter_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/idct_blk_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp8/common/x86/idct_blk_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/denoising_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp8/encoder/x86/denoising_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/vp8_enc_stubs_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp8/encoder/x86/vp8_enc_stubs_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/vp8_quantize_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp8/encoder/x86/vp8_quantize_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_idct_intrin_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp9/common/x86/vp9_idct_intrin_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_dct_intrin_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp9/encoder/x86/vp9_dct_intrin_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_denoiser_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp9/encoder/x86/vp9_denoiser_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_highbd_block_error_intrin_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp9/encoder/x86/vp9_highbd_block_error_intrin_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_quantize_sse2.o: cc ../../third_party/libvpx/source/libvpx/vp9/encoder/x86/vp9_quantize_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/avg_intrin_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/avg_intrin_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/avg_pred_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/avg_pred_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/fwd_txfm_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/fwd_txfm_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_idct16x16_add_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/highbd_idct16x16_add_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_idct32x32_add_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/highbd_idct32x32_add_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_idct4x4_add_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/highbd_idct4x4_add_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_idct8x8_add_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/highbd_idct8x8_add_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_intrapred_intrin_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/highbd_intrapred_intrin_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_loopfilter_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/highbd_loopfilter_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_quantize_intrin_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/highbd_quantize_intrin_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_variance_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/highbd_variance_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/inv_txfm_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/inv_txfm_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/loopfilter_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/loopfilter_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/post_proc_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/post_proc_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/quantize_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/quantize_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/sum_squares_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/sum_squares_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/variance_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/variance_sse2.c
+build obj/third_party/libvpx/libvpx_intrinsics_sse2/vpx_subpixel_4t_intrin_sse2.o: cc ../../third_party/libvpx/source/libvpx/vpx_dsp/x86/vpx_subpixel_4t_intrin_sse2.c
+
+build obj/third_party/libvpx/libvpx_intrinsics_sse2.stamp: stamp obj/third_party/libvpx/libvpx_intrinsics_sse2/bilinear_filter_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/idct_blk_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/denoising_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/vp8_enc_stubs_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/vp8_quantize_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_idct_intrin_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_dct_intrin_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_denoiser_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_highbd_block_error_intrin_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/vp9_quantize_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/avg_intrin_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/avg_pred_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/fwd_txfm_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_idct16x16_add_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_idct32x32_add_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_idct4x4_add_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_idct8x8_add_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_intrapred_intrin_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_loopfilter_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_quantize_intrin_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/highbd_variance_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/inv_txfm_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/loopfilter_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/post_proc_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/quantize_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/sum_squares_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/variance_sse2.o obj/third_party/libvpx/libvpx_intrinsics_sse2/vpx_subpixel_4t_intrin_sse2.o

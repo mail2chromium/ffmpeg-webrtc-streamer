@@ -1,0 +1,11 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen
+label_name = simd_asm
+target_out_dir = obj/third_party/libjpeg_turbo
+target_output_name = libsimd_asm
+
+
+build obj/third_party/libjpeg_turbo/libsimd_asm.a: alink obj/third_party/libjpeg_turbo/simd_asm/jccolor-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jccolor-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jcgray-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jcgray-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jchuff-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jcphuff-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jcsample-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jcsample-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jdcolor-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jdcolor-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jdmerge-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jdmerge-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jdsample-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jdsample-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jfdctflt-sse.o obj/third_party/libjpeg_turbo/simd_asm/jfdctfst-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jfdctint-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jfdctint-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jidctflt-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jidctfst-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jidctint-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jidctint-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jidctred-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jquantf-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jquanti-avx2.o obj/third_party/libjpeg_turbo/simd_asm/jquanti-sse2.o obj/third_party/libjpeg_turbo/simd_asm/jsimdcpu.o || obj/third_party/libjpeg_turbo/simd_asm_action.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/libjpeg_turbo

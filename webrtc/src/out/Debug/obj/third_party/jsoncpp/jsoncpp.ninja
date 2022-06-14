@@ -1,0 +1,13 @@
+defines = -DJSON_USE_EXCEPTION=0 -DJSON_USE_NULLREF=0 -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../../third_party/jsoncpp/source/src/lib_json -I../.. -Igen -I../../third_party/jsoncpp/source/include -I../../third_party/jsoncpp/generated
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -Wall -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden
+cflags_cc = -Wno-implicit-fallthrough -std=gnu++14 -Wno-narrowing -Wno-class-memaccess -fno-exceptions --sysroot=../../build/linux/debian_sid_amd64-sysroot -fvisibility-inlines-hidden -Wno-deprecated-declarations
+label_name = jsoncpp
+target_out_dir = obj/third_party/jsoncpp
+target_output_name = jsoncpp
+
+build obj/third_party/jsoncpp/jsoncpp/json_reader.o: cxx ../../third_party/jsoncpp/source/src/lib_json/json_reader.cpp
+build obj/third_party/jsoncpp/jsoncpp/json_value.o: cxx ../../third_party/jsoncpp/source/src/lib_json/json_value.cpp
+build obj/third_party/jsoncpp/jsoncpp/json_writer.o: cxx ../../third_party/jsoncpp/source/src/lib_json/json_writer.cpp
+
+build obj/third_party/jsoncpp/jsoncpp.stamp: stamp obj/third_party/jsoncpp/jsoncpp/json_reader.o obj/third_party/jsoncpp/jsoncpp/json_value.o obj/third_party/jsoncpp/jsoncpp/json_writer.o

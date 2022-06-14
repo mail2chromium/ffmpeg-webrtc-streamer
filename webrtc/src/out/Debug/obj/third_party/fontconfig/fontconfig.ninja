@@ -1,0 +1,41 @@
+defines = -DHAVE_CONFIG_H -DFC_CACHEDIR=\"/var/cache/fontconfig\" -DFC_TEMPLATEDIR=\"/usr/share/fontconfig/conf.avail\" -DFONTCONFIG_PATH=\"/etc/fonts\" -DFC_ATTRIBUTE_VISIBILITY_HIDDEN=__attribute\(\(visibility\(\"hidden\"\)\)\) -DFC_ATTRIBUTE_VISIBILITY_EXPORT=__attribute\(\(visibility\(\"hidden\"\)\)\) -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DFT_CONFIG_CONFIG_H=\"freetype-custom-config/ftconfig.h\" -DFT_CONFIG_MODULES_H=\"freetype-custom-config/ftmodule.h\" -DFT_CONFIG_OPTIONS_H=\"freetype-custom-config/ftoption.h\" -DPDFIUM_REQUIRED_MODULES -DCHROMIUM_RESTRICT_VISIBILITY -DU_USING_ICU_NAMESPACE=0 -DU_ENABLE_DYLOAD=0 -DUSE_CHROMIUM_ICU=1 -DU_ENABLE_TRACING=1 -DU_ENABLE_RESOURCE_TRACING=0 -DU_STATIC_IMPLEMENTATION -DICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_FILE -DUCHAR_TYPE=uint16_t
+include_dirs = -I../../third_party/fontconfig/include -I../../third_party/fontconfig/include/src -I../.. -Igen -I../../third_party/fontconfig/src -I../../third_party/freetype/include -I../../third_party/freetype/src/include -I../../third_party/harfbuzz-ng/src/src -I../../third_party/libxml/src/include -I../../third_party/libxml/linux/include -I../../third_party/icu/source/common -I../../third_party/icu/source/i18n -I../../third_party/zlib
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -DLIBXML_STATIC=
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = fontconfig
+target_out_dir = obj/third_party/fontconfig
+target_output_name = libfontconfig
+
+build obj/third_party/fontconfig/fontconfig/fcatomic.o: cc ../../third_party/fontconfig/src/src/fcatomic.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fccache.o: cc ../../third_party/fontconfig/src/src/fccache.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fccfg.o: cc ../../third_party/fontconfig/src/src/fccfg.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fccharset.o: cc ../../third_party/fontconfig/src/src/fccharset.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fccompat.o: cc ../../third_party/fontconfig/src/src/fccompat.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcdbg.o: cc ../../third_party/fontconfig/src/src/fcdbg.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcdefault.o: cc ../../third_party/fontconfig/src/src/fcdefault.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcdir.o: cc ../../third_party/fontconfig/src/src/fcdir.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcformat.o: cc ../../third_party/fontconfig/src/src/fcformat.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcfreetype.o: cc ../../third_party/fontconfig/src/src/fcfreetype.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcfs.o: cc ../../third_party/fontconfig/src/src/fcfs.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fchash.o: cc ../../third_party/fontconfig/src/src/fchash.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcinit.o: cc ../../third_party/fontconfig/src/src/fcinit.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fclang.o: cc ../../third_party/fontconfig/src/src/fclang.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fclist.o: cc ../../third_party/fontconfig/src/src/fclist.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcmatch.o: cc ../../third_party/fontconfig/src/src/fcmatch.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcmatrix.o: cc ../../third_party/fontconfig/src/src/fcmatrix.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcname.o: cc ../../third_party/fontconfig/src/src/fcname.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcobjs.o: cc ../../third_party/fontconfig/src/src/fcobjs.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcpat.o: cc ../../third_party/fontconfig/src/src/fcpat.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcptrlist.o: cc ../../third_party/fontconfig/src/src/fcptrlist.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcrange.o: cc ../../third_party/fontconfig/src/src/fcrange.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcserialize.o: cc ../../third_party/fontconfig/src/src/fcserialize.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcstat.o: cc ../../third_party/fontconfig/src/src/fcstat.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcstr.o: cc ../../third_party/fontconfig/src/src/fcstr.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcweight.o: cc ../../third_party/fontconfig/src/src/fcweight.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/fcxml.o: cc ../../third_party/fontconfig/src/src/fcxml.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/fontconfig/fontconfig/ftglue.o: cc ../../third_party/fontconfig/src/src/ftglue.c || obj/third_party/icu/icudata.stamp
+
+build obj/third_party/fontconfig/libfontconfig.a: alink obj/third_party/fontconfig/fontconfig/fcatomic.o obj/third_party/fontconfig/fontconfig/fccache.o obj/third_party/fontconfig/fontconfig/fccfg.o obj/third_party/fontconfig/fontconfig/fccharset.o obj/third_party/fontconfig/fontconfig/fccompat.o obj/third_party/fontconfig/fontconfig/fcdbg.o obj/third_party/fontconfig/fontconfig/fcdefault.o obj/third_party/fontconfig/fontconfig/fcdir.o obj/third_party/fontconfig/fontconfig/fcformat.o obj/third_party/fontconfig/fontconfig/fcfreetype.o obj/third_party/fontconfig/fontconfig/fcfs.o obj/third_party/fontconfig/fontconfig/fchash.o obj/third_party/fontconfig/fontconfig/fcinit.o obj/third_party/fontconfig/fontconfig/fclang.o obj/third_party/fontconfig/fontconfig/fclist.o obj/third_party/fontconfig/fontconfig/fcmatch.o obj/third_party/fontconfig/fontconfig/fcmatrix.o obj/third_party/fontconfig/fontconfig/fcname.o obj/third_party/fontconfig/fontconfig/fcobjs.o obj/third_party/fontconfig/fontconfig/fcpat.o obj/third_party/fontconfig/fontconfig/fcptrlist.o obj/third_party/fontconfig/fontconfig/fcrange.o obj/third_party/fontconfig/fontconfig/fcserialize.o obj/third_party/fontconfig/fontconfig/fcstat.o obj/third_party/fontconfig/fontconfig/fcstr.o obj/third_party/fontconfig/fontconfig/fcweight.o obj/third_party/fontconfig/fontconfig/fcxml.o obj/third_party/fontconfig/fontconfig/ftglue.o || obj/build/config/freetype/freetype.stamp obj/third_party/libxml/libxml2.a obj/third_party/zlib/libchrome_zlib.a obj/third_party/freetype_harfbuzz.stamp obj/third_party/freetype/freetype_source.stamp obj/third_party/libpng/libpng_sources.stamp obj/third_party/zlib/zlib_adler32_simd.stamp obj/third_party/zlib/zlib_inflate_chunk_simd.stamp obj/third_party/zlib/zlib_crc32_simd.stamp obj/third_party/zlib/zlib_x86_simd.stamp obj/third_party/harfbuzz-ng/harfbuzz_source.stamp obj/third_party/icu/libicuuc.a
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/fontconfig

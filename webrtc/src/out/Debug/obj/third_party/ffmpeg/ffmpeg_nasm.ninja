@@ -1,0 +1,11 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen
+label_name = ffmpeg_nasm
+target_out_dir = obj/third_party/ffmpeg
+target_output_name = libffmpeg_nasm
+
+
+build obj/third_party/ffmpeg/libffmpeg_nasm.a: alink obj/third_party/ffmpeg/ffmpeg_nasm/dct32.o obj/third_party/ffmpeg/ffmpeg_nasm/fft.o obj/third_party/ffmpeg/ffmpeg_nasm/flacdsp.o obj/third_party/ffmpeg/ffmpeg_nasm/imdct36.o obj/third_party/ffmpeg/ffmpeg_nasm/vorbisdsp.o obj/third_party/ffmpeg/ffmpeg_nasm/cpuid.o obj/third_party/ffmpeg/ffmpeg_nasm/fixed_dsp.o obj/third_party/ffmpeg/ffmpeg_nasm/float_dsp.o obj/third_party/ffmpeg/ffmpeg_nasm/imgutils.o obj/third_party/ffmpeg/ffmpeg_nasm/lls.o obj/third_party/ffmpeg/ffmpeg_nasm/autorename_libavcodec_x86_videodsp.o obj/third_party/ffmpeg/ffmpeg_nasm/fpel.o obj/third_party/ffmpeg/ffmpeg_nasm/h264_intrapred.o obj/third_party/ffmpeg/ffmpeg_nasm/h264_intrapred_10bit.o obj/third_party/ffmpeg/ffmpeg_nasm/hpeldsp.o obj/third_party/ffmpeg/ffmpeg_nasm/hpeldsp_vp3.o obj/third_party/ffmpeg/ffmpeg_nasm/vp3dsp.o obj/third_party/ffmpeg/ffmpeg_nasm/vp8dsp.o obj/third_party/ffmpeg/ffmpeg_nasm/vp8dsp_loopfilter.o || obj/third_party/ffmpeg/ffmpeg_nasm_action.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/ffmpeg

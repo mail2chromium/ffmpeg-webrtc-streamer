@@ -1,0 +1,27 @@
+defines = -DPNG_SET_OPTION_SUPPORTED -DPNG_INTEL_SSE_OPT=1 -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/libpng -I../../third_party/zlib
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = libpng_sources
+target_out_dir = obj/third_party/libpng
+target_output_name = libpng_sources
+
+build obj/third_party/libpng/libpng_sources/png.o: cc ../../third_party/libpng/png.c
+build obj/third_party/libpng/libpng_sources/pngerror.o: cc ../../third_party/libpng/pngerror.c
+build obj/third_party/libpng/libpng_sources/pngget.o: cc ../../third_party/libpng/pngget.c
+build obj/third_party/libpng/libpng_sources/pngmem.o: cc ../../third_party/libpng/pngmem.c
+build obj/third_party/libpng/libpng_sources/pngpread.o: cc ../../third_party/libpng/pngpread.c
+build obj/third_party/libpng/libpng_sources/pngread.o: cc ../../third_party/libpng/pngread.c
+build obj/third_party/libpng/libpng_sources/pngrio.o: cc ../../third_party/libpng/pngrio.c
+build obj/third_party/libpng/libpng_sources/pngrtran.o: cc ../../third_party/libpng/pngrtran.c
+build obj/third_party/libpng/libpng_sources/pngrutil.o: cc ../../third_party/libpng/pngrutil.c
+build obj/third_party/libpng/libpng_sources/pngset.o: cc ../../third_party/libpng/pngset.c
+build obj/third_party/libpng/libpng_sources/pngtrans.o: cc ../../third_party/libpng/pngtrans.c
+build obj/third_party/libpng/libpng_sources/pngwio.o: cc ../../third_party/libpng/pngwio.c
+build obj/third_party/libpng/libpng_sources/pngwrite.o: cc ../../third_party/libpng/pngwrite.c
+build obj/third_party/libpng/libpng_sources/pngwtran.o: cc ../../third_party/libpng/pngwtran.c
+build obj/third_party/libpng/libpng_sources/pngwutil.o: cc ../../third_party/libpng/pngwutil.c
+build obj/third_party/libpng/libpng_sources/filter_sse2_intrinsics.o: cc ../../third_party/libpng/intel/filter_sse2_intrinsics.c
+build obj/third_party/libpng/libpng_sources/intel_init.o: cc ../../third_party/libpng/intel/intel_init.c
+
+build obj/third_party/libpng/libpng_sources.stamp: stamp obj/third_party/libpng/libpng_sources/png.o obj/third_party/libpng/libpng_sources/pngerror.o obj/third_party/libpng/libpng_sources/pngget.o obj/third_party/libpng/libpng_sources/pngmem.o obj/third_party/libpng/libpng_sources/pngpread.o obj/third_party/libpng/libpng_sources/pngread.o obj/third_party/libpng/libpng_sources/pngrio.o obj/third_party/libpng/libpng_sources/pngrtran.o obj/third_party/libpng/libpng_sources/pngrutil.o obj/third_party/libpng/libpng_sources/pngset.o obj/third_party/libpng/libpng_sources/pngtrans.o obj/third_party/libpng/libpng_sources/pngwio.o obj/third_party/libpng/libpng_sources/pngwrite.o obj/third_party/libpng/libpng_sources/pngwtran.o obj/third_party/libpng/libpng_sources/pngwutil.o obj/third_party/libpng/libpng_sources/filter_sse2_intrinsics.o obj/third_party/libpng/libpng_sources/intel_init.o || obj/third_party/zlib/libchrome_zlib.a obj/third_party/zlib/zlib_adler32_simd.stamp obj/third_party/zlib/zlib_inflate_chunk_simd.stamp obj/third_party/zlib/zlib_crc32_simd.stamp obj/third_party/zlib/zlib_x86_simd.stamp

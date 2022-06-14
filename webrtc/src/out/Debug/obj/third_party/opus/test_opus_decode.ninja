@@ -1,0 +1,16 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/opus/src/celt -I../../third_party/opus/src/silk -I../../third_party/opus/src/include
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = test_opus_decode
+target_out_dir = obj/third_party/opus
+target_output_name = test_opus_decode
+
+build obj/third_party/opus/test_opus_decode/test_opus_decode.o: cc ../../third_party/opus/src/tests/test_opus_decode.c
+
+build ./test_opus_decode: link obj/third_party/opus/test_opus_decode/test_opus_decode.o obj/third_party/opus/opus_sse41/pitch_sse4_1.o obj/third_party/opus/opus_sse41/NSQ_del_dec_sse4_1.o obj/third_party/opus/opus_sse41/NSQ_sse4_1.o obj/third_party/opus/opus_sse41/VAD_sse4_1.o obj/third_party/opus/opus_sse41/VQ_WMat_EC_sse4_1.o obj/third_party/opus/libopus.a || obj/build/win/default_exe_manifest.stamp obj/build/config/executable_deps.stamp obj/third_party/opus/opus_sse41.stamp
+  ldflags = -Wl,--fatal-warnings -fPIC -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,-z,defs -Wl,--as-needed -fuse-ld=gold -Wl,--threads -Wl,--thread-count=4 -m64 -Wl,-O2 -Wl,--gc-sections -rdynamic --sysroot=../../build/linux/debian_sid_amd64-sysroot -L../../build/linux/debian_sid_amd64-sysroot/usr/local/lib/x86_64-linux-gnu -L../../build/linux/debian_sid_amd64-sysroot/lib/x86_64-linux-gnu -L../../build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu -pie -Wl,--disable-new-dtags
+  libs = -latomic -ldl -lpthread -lrt
+  frameworks =
+  output_extension = 
+  output_dir = .

@@ -1,0 +1,40 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DU_USING_ICU_NAMESPACE=0 -DU_ENABLE_DYLOAD=0 -DUSE_CHROMIUM_ICU=1 -DU_ENABLE_TRACING=1 -DU_ENABLE_RESOURCE_TRACING=0 -DU_STATIC_IMPLEMENTATION -DICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_FILE -DUCHAR_TYPE=uint16_t
+include_dirs = -I../../third_party/libxml/linux -I../.. -Igen -I../../third_party/libxml/src/include -I../../third_party/libxml/linux/include -I../../third_party/icu/source/common -I../../third_party/icu/source/i18n -I../../third_party/zlib
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -O2 -fno-ident -fdata-sections -ffunction-sections -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -Wno-format-extra-args -DLIBXML_STATIC=
+cflags_c = -std=gnu11 --sysroot=../../build/linux/debian_sid_amd64-sysroot
+label_name = libxml
+target_out_dir = obj/third_party/libxml
+target_output_name = libxml2
+
+build obj/third_party/libxml/libxml/HTMLparser.o: cc ../../third_party/libxml/src/HTMLparser.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/HTMLtree.o: cc ../../third_party/libxml/src/HTMLtree.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/SAX2.o: cc ../../third_party/libxml/src/SAX2.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/buf.o: cc ../../third_party/libxml/src/buf.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/chvalid.o: cc ../../third_party/libxml/src/chvalid.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/dict.o: cc ../../third_party/libxml/src/dict.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/encoding.o: cc ../../third_party/libxml/src/encoding.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/entities.o: cc ../../third_party/libxml/src/entities.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/error.o: cc ../../third_party/libxml/src/error.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/globals.o: cc ../../third_party/libxml/src/globals.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/hash.o: cc ../../third_party/libxml/src/hash.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/list.o: cc ../../third_party/libxml/src/list.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/parser.o: cc ../../third_party/libxml/src/parser.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/parserInternals.o: cc ../../third_party/libxml/src/parserInternals.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/pattern.o: cc ../../third_party/libxml/src/pattern.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/threads.o: cc ../../third_party/libxml/src/threads.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/tree.o: cc ../../third_party/libxml/src/tree.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/uri.o: cc ../../third_party/libxml/src/uri.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/valid.o: cc ../../third_party/libxml/src/valid.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/xmlIO.o: cc ../../third_party/libxml/src/xmlIO.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/xmlmemory.o: cc ../../third_party/libxml/src/xmlmemory.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/xmlreader.o: cc ../../third_party/libxml/src/xmlreader.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/xmlsave.o: cc ../../third_party/libxml/src/xmlsave.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/xmlstring.o: cc ../../third_party/libxml/src/xmlstring.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/xmlunicode.o: cc ../../third_party/libxml/src/xmlunicode.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/xmlwriter.o: cc ../../third_party/libxml/src/xmlwriter.c || obj/third_party/icu/icudata.stamp
+build obj/third_party/libxml/libxml/xpath.o: cc ../../third_party/libxml/src/xpath.c || obj/third_party/icu/icudata.stamp
+
+build obj/third_party/libxml/libxml2.a: alink obj/third_party/libxml/libxml/HTMLparser.o obj/third_party/libxml/libxml/HTMLtree.o obj/third_party/libxml/libxml/SAX2.o obj/third_party/libxml/libxml/buf.o obj/third_party/libxml/libxml/chvalid.o obj/third_party/libxml/libxml/dict.o obj/third_party/libxml/libxml/encoding.o obj/third_party/libxml/libxml/entities.o obj/third_party/libxml/libxml/error.o obj/third_party/libxml/libxml/globals.o obj/third_party/libxml/libxml/hash.o obj/third_party/libxml/libxml/list.o obj/third_party/libxml/libxml/parser.o obj/third_party/libxml/libxml/parserInternals.o obj/third_party/libxml/libxml/pattern.o obj/third_party/libxml/libxml/threads.o obj/third_party/libxml/libxml/tree.o obj/third_party/libxml/libxml/uri.o obj/third_party/libxml/libxml/valid.o obj/third_party/libxml/libxml/xmlIO.o obj/third_party/libxml/libxml/xmlmemory.o obj/third_party/libxml/libxml/xmlreader.o obj/third_party/libxml/libxml/xmlsave.o obj/third_party/libxml/libxml/xmlstring.o obj/third_party/libxml/libxml/xmlunicode.o obj/third_party/libxml/libxml/xmlwriter.o obj/third_party/libxml/libxml/xpath.o || obj/third_party/icu/libicuuc.a obj/third_party/zlib/libchrome_zlib.a obj/third_party/zlib/zlib_adler32_simd.stamp obj/third_party/zlib/zlib_inflate_chunk_simd.stamp obj/third_party/zlib/zlib_crc32_simd.stamp obj/third_party/zlib/zlib_x86_simd.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/libxml

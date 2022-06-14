@@ -1,0 +1,11 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen
+label_name = libaom_nasm
+target_out_dir = obj/third_party/libaom
+target_output_name = libaom_nasm
+
+
+build obj/third_party/libaom/libaom_nasm.a: alink obj/third_party/libaom/libaom_nasm/aom_high_subpixel_8t_sse2.o obj/third_party/libaom/libaom_nasm/aom_high_subpixel_bilinear_sse2.o obj/third_party/libaom/libaom_nasm/aom_subpixel_8t_sse2.o obj/third_party/libaom/libaom_nasm/aom_subpixel_bilinear_sse2.o obj/third_party/libaom/libaom_nasm/highbd_intrapred_asm_sse2.o obj/third_party/libaom/libaom_nasm/intrapred_asm_sse2.o obj/third_party/libaom/libaom_nasm/inv_wht_sse2.o obj/third_party/libaom/libaom_nasm/aom_subpixel_8t_ssse3.o obj/third_party/libaom/libaom_nasm/aom_subpixel_bilinear_ssse3.o obj/third_party/libaom/libaom_nasm/emms.o obj/third_party/libaom/libaom_nasm/dct_sse2.o obj/third_party/libaom/libaom_nasm/error_sse2.o obj/third_party/libaom/libaom_nasm/highbd_sad4d_sse2.o obj/third_party/libaom/libaom_nasm/highbd_sad_sse2.o obj/third_party/libaom/libaom_nasm/highbd_subpel_variance_impl_sse2.o obj/third_party/libaom/libaom_nasm/highbd_variance_impl_sse2.o obj/third_party/libaom/libaom_nasm/sad4d_sse2.o obj/third_party/libaom/libaom_nasm/sad_sse2.o obj/third_party/libaom/libaom_nasm/subpel_variance_sse2.o obj/third_party/libaom/libaom_nasm/subtract_sse2.o obj/third_party/libaom/libaom_nasm/av1_quantize_ssse3_x86_64.o obj/third_party/libaom/libaom_nasm/ssim_sse2_x86_64.o obj/third_party/libaom/libaom_nasm/fwd_txfm_ssse3_x86_64.o obj/third_party/libaom/libaom_nasm/quantize_ssse3_x86_64.o || obj/third_party/libaom/libaom_nasm_action.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/libaom

@@ -1,0 +1,41 @@
+defines = -DHAVE_JPEG -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen -I../../third_party/libyuv/include -I../../third_party/libjpeg_turbo
+cflags = -ffp-contract=fast -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -Wall -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -fno-omit-frame-pointer -g0 -fvisibility=hidden -O2 -fno-ident -fdata-sections -ffunction-sections
+cflags_cc = -std=gnu++14 -Wno-narrowing -Wno-class-memaccess -fno-exceptions --sysroot=../../build/linux/debian_sid_amd64-sysroot -fvisibility-inlines-hidden
+label_name = libyuv_internal
+target_out_dir = obj/third_party/libyuv
+target_output_name = libyuv_internal
+
+build obj/third_party/libyuv/libyuv_internal/compare.o: cxx ../../third_party/libyuv/source/compare.cc
+build obj/third_party/libyuv/libyuv_internal/compare_common.o: cxx ../../third_party/libyuv/source/compare_common.cc
+build obj/third_party/libyuv/libyuv_internal/compare_gcc.o: cxx ../../third_party/libyuv/source/compare_gcc.cc
+build obj/third_party/libyuv/libyuv_internal/convert.o: cxx ../../third_party/libyuv/source/convert.cc
+build obj/third_party/libyuv/libyuv_internal/convert_argb.o: cxx ../../third_party/libyuv/source/convert_argb.cc
+build obj/third_party/libyuv/libyuv_internal/convert_from.o: cxx ../../third_party/libyuv/source/convert_from.cc
+build obj/third_party/libyuv/libyuv_internal/convert_from_argb.o: cxx ../../third_party/libyuv/source/convert_from_argb.cc
+build obj/third_party/libyuv/libyuv_internal/convert_jpeg.o: cxx ../../third_party/libyuv/source/convert_jpeg.cc
+build obj/third_party/libyuv/libyuv_internal/convert_to_argb.o: cxx ../../third_party/libyuv/source/convert_to_argb.cc
+build obj/third_party/libyuv/libyuv_internal/convert_to_i420.o: cxx ../../third_party/libyuv/source/convert_to_i420.cc
+build obj/third_party/libyuv/libyuv_internal/cpu_id.o: cxx ../../third_party/libyuv/source/cpu_id.cc
+build obj/third_party/libyuv/libyuv_internal/mjpeg_decoder.o: cxx ../../third_party/libyuv/source/mjpeg_decoder.cc
+build obj/third_party/libyuv/libyuv_internal/mjpeg_validate.o: cxx ../../third_party/libyuv/source/mjpeg_validate.cc
+build obj/third_party/libyuv/libyuv_internal/planar_functions.o: cxx ../../third_party/libyuv/source/planar_functions.cc
+build obj/third_party/libyuv/libyuv_internal/rotate.o: cxx ../../third_party/libyuv/source/rotate.cc
+build obj/third_party/libyuv/libyuv_internal/rotate_any.o: cxx ../../third_party/libyuv/source/rotate_any.cc
+build obj/third_party/libyuv/libyuv_internal/rotate_argb.o: cxx ../../third_party/libyuv/source/rotate_argb.cc
+build obj/third_party/libyuv/libyuv_internal/rotate_common.o: cxx ../../third_party/libyuv/source/rotate_common.cc
+build obj/third_party/libyuv/libyuv_internal/rotate_gcc.o: cxx ../../third_party/libyuv/source/rotate_gcc.cc
+build obj/third_party/libyuv/libyuv_internal/row_any.o: cxx ../../third_party/libyuv/source/row_any.cc
+build obj/third_party/libyuv/libyuv_internal/row_common.o: cxx ../../third_party/libyuv/source/row_common.cc
+build obj/third_party/libyuv/libyuv_internal/row_gcc.o: cxx ../../third_party/libyuv/source/row_gcc.cc
+build obj/third_party/libyuv/libyuv_internal/scale.o: cxx ../../third_party/libyuv/source/scale.cc
+build obj/third_party/libyuv/libyuv_internal/scale_any.o: cxx ../../third_party/libyuv/source/scale_any.cc
+build obj/third_party/libyuv/libyuv_internal/scale_argb.o: cxx ../../third_party/libyuv/source/scale_argb.cc
+build obj/third_party/libyuv/libyuv_internal/scale_common.o: cxx ../../third_party/libyuv/source/scale_common.cc
+build obj/third_party/libyuv/libyuv_internal/scale_gcc.o: cxx ../../third_party/libyuv/source/scale_gcc.cc
+build obj/third_party/libyuv/libyuv_internal/video_common.o: cxx ../../third_party/libyuv/source/video_common.cc
+
+build obj/third_party/libyuv/libyuv_internal.a: alink obj/third_party/libyuv/libyuv_internal/compare.o obj/third_party/libyuv/libyuv_internal/compare_common.o obj/third_party/libyuv/libyuv_internal/compare_gcc.o obj/third_party/libyuv/libyuv_internal/convert.o obj/third_party/libyuv/libyuv_internal/convert_argb.o obj/third_party/libyuv/libyuv_internal/convert_from.o obj/third_party/libyuv/libyuv_internal/convert_from_argb.o obj/third_party/libyuv/libyuv_internal/convert_jpeg.o obj/third_party/libyuv/libyuv_internal/convert_to_argb.o obj/third_party/libyuv/libyuv_internal/convert_to_i420.o obj/third_party/libyuv/libyuv_internal/cpu_id.o obj/third_party/libyuv/libyuv_internal/mjpeg_decoder.o obj/third_party/libyuv/libyuv_internal/mjpeg_validate.o obj/third_party/libyuv/libyuv_internal/planar_functions.o obj/third_party/libyuv/libyuv_internal/rotate.o obj/third_party/libyuv/libyuv_internal/rotate_any.o obj/third_party/libyuv/libyuv_internal/rotate_argb.o obj/third_party/libyuv/libyuv_internal/rotate_common.o obj/third_party/libyuv/libyuv_internal/rotate_gcc.o obj/third_party/libyuv/libyuv_internal/row_any.o obj/third_party/libyuv/libyuv_internal/row_common.o obj/third_party/libyuv/libyuv_internal/row_gcc.o obj/third_party/libyuv/libyuv_internal/scale.o obj/third_party/libyuv/libyuv_internal/scale_any.o obj/third_party/libyuv/libyuv_internal/scale_argb.o obj/third_party/libyuv/libyuv_internal/scale_common.o obj/third_party/libyuv/libyuv_internal/scale_gcc.o obj/third_party/libyuv/libyuv_internal/video_common.o || obj/third_party/jpeg_includes.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/libyuv

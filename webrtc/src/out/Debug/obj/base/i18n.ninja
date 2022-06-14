@@ -1,0 +1,33 @@
+defines = -DBASE_I18N_IMPLEMENTATION -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_40 -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_40 -DU_USING_ICU_NAMESPACE=0 -DU_ENABLE_DYLOAD=0 -DUSE_CHROMIUM_ICU=1 -DU_ENABLE_TRACING=1 -DU_ENABLE_RESOURCE_TRACING=0 -DU_STATIC_IMPLEMENTATION -DICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_FILE -DUCHAR_TYPE=uint16_t
+include_dirs = -I../.. -Igen -I../../third_party/ced/src -I../../third_party/icu/source/common -I../../third_party/icu/source/i18n -I../../third_party/boringssl/src/include
+cflags = -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pipe -pthread -m64 -march=x86-64 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -Wall -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-missing-field-initializers -Wno-unused-parameter -fno-omit-frame-pointer -g0 -fvisibility=hidden -O2 -fno-ident -fdata-sections -ffunction-sections -isystem../../build/linux/debian_sid_amd64-sysroot/usr/include/glib-2.0 -isystem../../build/linux/debian_sid_amd64-sysroot/usr/lib/x86_64-linux-gnu/glib-2.0/include
+cflags_cc = -std=gnu++14 -Wno-narrowing -Wno-class-memaccess -fno-exceptions --sysroot=../../build/linux/debian_sid_amd64-sysroot -fvisibility-inlines-hidden
+label_name = i18n
+target_out_dir = obj/base
+target_output_name = libbase_i18n
+
+build obj/base/i18n.inputdeps.stamp: stamp obj/base/anchor_functions_buildflags.stamp obj/base/build_date.stamp obj/base/cfi_buildflags.stamp obj/base/clang_profiling_buildflags.stamp obj/base/debugging_buildflags.stamp obj/base/logging_buildflags.stamp obj/base/orderfile_buildflags.stamp obj/base/partition_alloc_buildflags.stamp obj/base/sanitizer_buildflags.stamp obj/base/synchronization_buildflags.stamp obj/base/allocator/buildflags.stamp obj/build/branding_buildflags.stamp obj/build/chromecast_buildflags.stamp obj/third_party/icu/icudata.stamp
+build obj/base/i18n/base_i18n_switches.o: cxx ../../base/i18n/base_i18n_switches.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/break_iterator.o: cxx ../../base/i18n/break_iterator.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/case_conversion.o: cxx ../../base/i18n/case_conversion.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/char_iterator.o: cxx ../../base/i18n/char_iterator.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/character_encoding.o: cxx ../../base/i18n/character_encoding.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/encoding_detection.o: cxx ../../base/i18n/encoding_detection.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/file_util_icu.o: cxx ../../base/i18n/file_util_icu.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/i18n_constants.o: cxx ../../base/i18n/i18n_constants.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/icu_string_conversions.o: cxx ../../base/i18n/icu_string_conversions.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/icu_util.o: cxx ../../base/i18n/icu_util.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/message_formatter.o: cxx ../../base/i18n/message_formatter.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/number_formatting.o: cxx ../../base/i18n/number_formatting.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/rtl.o: cxx ../../base/i18n/rtl.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/streaming_utf8_validator.o: cxx ../../base/i18n/streaming_utf8_validator.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/string_compare.o: cxx ../../base/i18n/string_compare.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/string_search.o: cxx ../../base/i18n/string_search.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/time_formatting.o: cxx ../../base/i18n/time_formatting.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/timezone.o: cxx ../../base/i18n/timezone.cc || obj/base/i18n.inputdeps.stamp
+build obj/base/i18n/utf8_validator_tables.o: cxx ../../base/i18n/utf8_validator_tables.cc || obj/base/i18n.inputdeps.stamp
+
+build obj/base/libbase_i18n.a: alink obj/base/i18n/base_i18n_switches.o obj/base/i18n/break_iterator.o obj/base/i18n/case_conversion.o obj/base/i18n/char_iterator.o obj/base/i18n/character_encoding.o obj/base/i18n/encoding_detection.o obj/base/i18n/file_util_icu.o obj/base/i18n/i18n_constants.o obj/base/i18n/icu_string_conversions.o obj/base/i18n/icu_util.o obj/base/i18n/message_formatter.o obj/base/i18n/number_formatting.o obj/base/i18n/rtl.o obj/base/i18n/streaming_utf8_validator.o obj/base/i18n/string_compare.o obj/base/i18n/string_search.o obj/base/i18n/time_formatting.o obj/base/i18n/timezone.o obj/base/i18n/utf8_validator_tables.o || obj/third_party/ced/libced.a obj/third_party/icu/icu.stamp obj/base/libbase.a obj/base/third_party/dynamic_annotations/libdynamic_annotations.a obj/build/chromecast_buildflags.stamp obj/third_party/icu/libicui18n.a obj/third_party/icu/libicuuc.a obj/base/libbase_static.a obj/base/numerics/base_numerics.stamp obj/third_party/boringssl/libboringssl.a obj/third_party/boringssl/boringssl_asm.stamp obj/third_party/boringssl/src/third_party/fiat/fiat_license.stamp obj/base/allocator/tcmalloc.stamp obj/base/third_party/double_conversion/libdouble_conversion.a obj/third_party/modp_b64/libmodp_b64.a obj/base/third_party/symbolize/libsymbolize.a obj/base/third_party/xdg_mime/libxdg_mime.a obj/base/third_party/xdg_user_dirs/libxdg_user_dirs.a obj/base/third_party/libevent/libevent.a
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/base

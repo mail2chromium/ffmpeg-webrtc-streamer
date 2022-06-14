@@ -1,0 +1,11 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -DCR_SYSROOT_HASH=52cf2961a3cddc0d46e1a2f7d9bf376fc16a61de -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../.. -Igen
+label_name = openh264_encoder_asm
+target_out_dir = obj/third_party/openh264
+target_output_name = libopenh264_encoder_asm
+
+
+build obj/third_party/openh264/libopenh264_encoder_asm.a: alink obj/third_party/openh264/openh264_encoder_asm/coeff.o obj/third_party/openh264/openh264_encoder_asm/dct.o obj/third_party/openh264/openh264_encoder_asm/intra_pred.o obj/third_party/openh264/openh264_encoder_asm/matrix_transpose.o obj/third_party/openh264/openh264_encoder_asm/memzero.o obj/third_party/openh264/openh264_encoder_asm/quant.o obj/third_party/openh264/openh264_encoder_asm/sample_sc.o obj/third_party/openh264/openh264_encoder_asm/score.o || obj/third_party/openh264/openh264_encoder_asm_action.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/openh264
