@@ -27,7 +27,7 @@ sudo apt-get install libstdc++-dev -y
 sudo apt-get install libstdc++-4.8-dev -y
 sudo apt-get install libwebsocketpp-dev -y
 sudo apt-get install nlohmann-json-dev -y
-sudo apt-get install nlohmann-json3-dev
+sudo apt-get install nlohmann-json3-dev -y
 sudo apt-get install libsndio-dev -y
 sudo apt-get install -y clang libc++-dev libc++abi-dev -y
 sudo apt install libx11-dev -y
@@ -43,4 +43,4 @@ sudo apt-get install liblzma-dev -y
 
 sudo apt-get install nasm
 
-git -C x264 pull 2> /dev/null || git clone --depth 1 https://code.videolan.org/videolan/x264.git && cd x264 && PATH="./bin:$PATH" PKG_CONFIG_PATH="./ffmpeg_build/lib/pkgconfig" ./configure --prefix="./ffmpeg_build" --bindir="./bin" --enable-static --enable-pic && PATH="./bin:$PATH" make && make install
+cd ./ffmpeg && git -C x264 pull 2> /dev/null || git clone --depth 1 https://code.videolan.org/videolan/x264.git && cd x264 && PATH="./bin:$PATH" PKG_CONFIG_PATH="./ffmpeg_build/lib/pkgconfig" ./configure --prefix="./ffmpeg_build" --bindir="./bin" --enable-static --enable-pic && PATH="./bin:$PATH" make && make install
