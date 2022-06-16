@@ -1,10 +1,3 @@
-<!--
-HTML index for the example client.
-
-Name: Muhammad Usman
-Email: mail2ch.usman@gmail.com
- -->
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,8 +10,28 @@ Email: mail2ch.usman@gmail.com
       crossorigin="anonymous"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.webrtc-experiment.com/getStats.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
+<style>
+  .flexcontainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid black;
+  }
+  .flexitem{
+   margin: 10px;
+    
+    border: 1px solid black;
+   
+   
+  }
+</style>
+
+
   </head>
-  <body style="background-color: #f6f6f6;">
+  <body>
     <div class="container">
       <div class="text-center pt-2 pb-2">
         <h1 class="text-primary">WebRTC Video Streamer Client</h1>
@@ -72,12 +85,72 @@ Email: mail2ch.usman@gmail.com
     <div class="messagebox" id="receiveMsg">
       <p>sample text</p>
     </div> -->
-<div class="container">
-  <div class="right-section text-center   pt-5  pl-1 pr-1  pb-1 ">
-    <video class="right-video w-75" id="remotevideo" autoplay controls></video>
+
+<div class="row">
+<div class="col-sm-5 col-md-5 col-lg-3" >
+  <div style="margin-top: 9vh;
+  margin-left: 10vh;">
+    <table class="table ">
+      <thead >
+        <tr class="row">
+          <th class="col-md-6"></th>
+          <th class="col-md-6">Stats</th>
+        </tr>
+      
+      </thead>
+
+      <tbody>
+        <tr class="row">
+          <td class="col-md-6">Data</td>
+          <td  class="col-md-6">
+            <label>Recv:</label>
+            <span id="peer1-totalDataForReceivers"></span>
+          </td>
+        </tr>
+
+        <tr class="row">
+          <td class="col-md-6">latency</td>
+          <td class="col-md-6">
+            <label>Audio:</label> <span id="peer1-audio-latency"></span
+            ><br />
+            <label>Video:</label> <span id="peer1-video-latency"></span>
+          </td>
+        </tr>
+
+        <tr class="row">
+          <td class="col-md-6">packetsLost</td>
+          <td class="col-md-6">
+            <label>Audio:</label> <span id="peer1-audio-packetsLost"></span
+            ><br />
+            <label>Video:</label> <span id="peer1-video-packetsLost"></span>
+          </td>
+        </tr>
+        <tr class="row">
+          <td class="col-md-6">Codecs</td>
+          <td class="col-md-6">
+            <label>Send:</label> <span id="peer1-codecsSend"></span><br />
+            <label>Recv:</label> <span id="peer1-codecsRecv"></span><br />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
-   
+<div class="col-sm-7 col-md-7 col-lg-9">
+  <div class="right-section " style="margin-top: 9vh;
+  margin-right: 10vh;">
+    <video
+      class="right-video w-100"
+      id="remotevideo"
+      autoplay
+      controls
+    ></video>
+  </div>
+</div>
+</div>
+
+
+  
 
     <script>
       var $ = function (id) {

@@ -1,0 +1,11 @@
+# get raw video frames
+
+./ffmpeg -re -y -f v4l2 -framerate 25 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 512k -s 640x480 -c:v rawvideo -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 output.yuv
+
+
+
+
+#get h264 encoded video frames
+
+
+./ffmpeg -re -y -f v4l2 -framerate 60 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 1024k -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 -vcodec h264 output.yuv

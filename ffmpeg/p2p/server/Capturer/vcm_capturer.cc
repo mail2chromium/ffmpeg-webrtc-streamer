@@ -3,6 +3,7 @@
 //
 
 #include "vcm_capturer.h"
+#include "../WebSocket/WebSocketHelper.h"
 //#include "test/win/d3d_renderer.h"
 #include "../WebSocket/WebSocketHelper.h"
 #include "video/video_send_stream.h"
@@ -138,11 +139,95 @@ rtc::VideoBroadcaster broadcaster_;
 
 
 std::vector<uint8_t> import_buff;
+int WebSocketHelper::raw_data = 0;
+
+void set_type(int type) {
+
+    WebSocketHelper::raw_data = type;
+    RTC_LOG(LS_ERROR) << "Video type: " << WebSocketHelper::raw_data;
+}
 
 void send_to_vc_wrapper(int pkt_size) {
     /*TODO import_buff is ready to dispatch over VideoChannel*/
-    RTC_LOG(LS_NONE) << pkt_size << ": Inside Callback Function";
+//    RTC_LOG(LS_NONE) << pkt_size << ": Inside Callback Function";
     int Width = 640, Height = 480; //640x480
+
+    if (WebSocketHelper::raw_data == 1) {
+        int stride_y = Width;
+        int stride_uv = (Width + 1) / 2;
+        libyuv::RotationMode rotation_mode = libyuv::kRotate0;
+        rtc::scoped_refptr<webrtc::I420Buffer> buffer = webrtc::I420Buffer::Create(
+                Width, Height, stride_y, stride_uv, stride_uv);
+
+
+        const int conversionResult = libyuv::ConvertToI420(
+                import_buff.data(), pkt_size, buffer.get()->MutableDataY(),
+                buffer.get()->StrideY(), buffer.get()->MutableDataU(),
+                buffer.get()->StrideU(), buffer.get()->MutableDataV(),
+                buffer.get()->StrideV(), 0, 0,  // No Cropping
+                Width, Height, Width, Height, rotation_mode,
+                ConvertVideoType(webrtc::VideoType::kI420));
+        if (conversionResult < 0) {
+            RTC_LOG(LS_ERROR) << "Failed to convert capture frame from type "
+                              << webrtc::VideoType::kI420 << "to I420.";
+        }
+
+
+        webrtc::VideoFrame captureFrame =
+                webrtc::VideoFrame::Builder()
+                        .set_video_frame_buffer(buffer)
+                        .set_timestamp_rtp(0)
+                        .set_timestamp_ms(rtc::TimeMillis())
+                        .set_rotation(webrtc::kVideoRotation_0)
+                        .build();
+
+        if (webrtc::video_stream_encoder_extern) {
+            if (oneTime) {
+//            RTC_LOG(LS_NONE) << pkt_size << ": Inside AddorUpdateSink Callback Function";
+                broadcaster_.AddOrUpdateSink(webrtc::video_stream_encoder_extern.get(),
+                                             rtc::VideoSinkWants());
+
+                oneTime = false;
+            }
+
+            if (!oneTime) {
+//            RTC_LOG(LS_NONE) << pkt_size << ": Inside Broadcasting Frame Callback Function";
+                broadcaster_.OnFrame(captureFrame);
+            }
+        }
+
+    } else if (WebSocketHelper::raw_data == 0) {
+//        RTC_LOG(LS_ERROR)<<"h264 data";
+        rtc::scoped_refptr<FH264FrameBuffer> buffer = new rtc::RefCountedObject<FH264FrameBuffer>(Width, Height);
+        buffer->GetBuffer().assign(import_buff.data(),
+                                   import_buff.data() + pkt_size);
+
+
+        webrtc::VideoFrame captureFrame =
+                webrtc::VideoFrame::Builder()
+                        .set_video_frame_buffer(buffer)
+                        .set_timestamp_rtp(0)
+                        .set_timestamp_ms(rtc::TimeMillis())
+                        .set_rotation(webrtc::kVideoRotation_0)
+                        .build();
+
+        if (webrtc::video_stream_encoder_extern) {
+            if (oneTime) {
+//            RTC_LOG(LS_NONE) << pkt_size << ": Inside AddorUpdateSink Callback Function";
+                broadcaster_.AddOrUpdateSink(webrtc::video_stream_encoder_extern.get(),
+                                             rtc::VideoSinkWants());
+
+                oneTime = false;
+            }
+
+            if (!oneTime) {
+//            RTC_LOG(LS_NONE) << pkt_size << ": Inside Broadcasting Frame Callback Function";
+                broadcaster_.OnFrame(captureFrame);
+            }
+        }
+//
+    }
+
 //    rtc::scoped_refptr<FH264FrameBuffer> buffer = new rtc::RefCountedObject<FH264FrameBuffer>(Width, Height);
 //    webrtc::VideoFrame Frame{buffer, webrtc::VideoRotation::kVideoRotation_0, 0};
 //
@@ -157,54 +242,35 @@ void send_to_vc_wrapper(int pkt_size) {
 //    Frame.set_ntp_time_ms(NtpTimeMs);
 //
 //    auto PkData = reinterpret_cast<const uint8_t *>(import_buff.data());
-//
-//    buffer->GetBuffer().assign(PkData, PkData + pkt_size);
+
+//    buffer->GetBuffer().assign(import_buff.data(),
+//                               import_buff.data() + pkt_size);
 //
 ////     webrtc::VideoFrame Frame = webrtc::VideoFrame::Builder()
 ////                                    .set_video_frame_buffer(buffer)
 ////                                    .set_ntp_time_ms(NtpTimeMs)
 ////                                    .set_rotation(webrtc::VideoRotation::kVideoRotation_0)
 ////                                    .build();
-    int stride_y = Width;
-    int stride_uv = (Width + 1) / 2;
-    libyuv::RotationMode rotation_mode = libyuv::kRotate0;
-    rtc::scoped_refptr<webrtc::I420Buffer> buffer = webrtc::I420Buffer::Create(
-            Width, Height, stride_y, stride_uv, stride_uv);
+//    int stride_y = Width;
+//    int stride_uv = (Width + 1) / 2;
+//    libyuv::RotationMode rotation_mode = libyuv::kRotate0;
+//    rtc::scoped_refptr<webrtc::I420Buffer> buffer = webrtc::I420Buffer::Create(
+//            Width, Height, stride_y, stride_uv, stride_uv);
 
-    const int conversionResult = libyuv::ConvertToI420(
-            import_buff.data(), pkt_size, buffer.get()->MutableDataY(),
-            buffer.get()->StrideY(), buffer.get()->MutableDataU(),
-            buffer.get()->StrideU(), buffer.get()->MutableDataV(),
-            buffer.get()->StrideV(), 0, 0,  // No Cropping
-            Width, Height, Width, Height, rotation_mode,
-            ConvertVideoType(webrtc::VideoType::kI420));
-    if (conversionResult < 0) {
-        RTC_LOG(LS_ERROR) << "Failed to convert capture frame from type "
-                          << webrtc::VideoType::kI420 << "to I420.";
-    }
 
-    webrtc::VideoFrame captureFrame =
-            webrtc::VideoFrame::Builder()
-                    .set_video_frame_buffer(buffer)
-                    .set_timestamp_rtp(0)
-                    .set_timestamp_ms(rtc::TimeMillis())
-                    .set_rotation(webrtc::kVideoRotation_0)
-                    .build();
 
-    if (webrtc::video_stream_encoder_extern) {
-        if (oneTime) {
-            RTC_LOG(LS_NONE) << pkt_size << ": Inside AddorUpdateSink Callback Function";
-            broadcaster_.AddOrUpdateSink(webrtc::video_stream_encoder_extern.get(),
-                                         rtc::VideoSinkWants());
+//    const int conversionResult = libyuv::ConvertToI420(
+//            import_buff.data(), pkt_size, buffer.get()->MutableDataY(),
+//            buffer.get()->StrideY(), buffer.get()->MutableDataU(),
+//            buffer.get()->StrideU(), buffer.get()->MutableDataV(),
+//            buffer.get()->StrideV(), 0, 0,  // No Cropping
+//            Width, Height, Width, Height, rotation_mode,
+//            ConvertVideoType(webrtc::VideoType::kI420));
+//    if (conversionResult < 0) {
+//        RTC_LOG(LS_ERROR) << "Failed to convert capture frame from type "
+//                          << webrtc::VideoType::kI420 << "to I420.";
+//    }
 
-            oneTime = false;
-        }
-
-        if (!oneTime) {
-            RTC_LOG(LS_NONE) << pkt_size << ": Inside Broadcasting Frame Callback Function";
-            broadcaster_.OnFrame(captureFrame);
-        }
-    }
 //
 
 }

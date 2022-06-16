@@ -11,6 +11,7 @@ using namespace std;
 //
 extern "C" void send_to_vc_wrapper(int);
 extern "C" void init(int);
+extern "C" void set_type(int);
 extern "C" void fill(int, uint8_t);
 extern "C" void delete_vc_import();
 

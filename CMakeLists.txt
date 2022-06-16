@@ -107,14 +107,10 @@ include_directories(
         "${CMAKE_SOURCE_DIR}/webrtc/src/media/engine"
         "${CMAKE_SOURCE_DIR}/webrtc/src/pc"
 
-
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/client/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/Engines"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/DataChannel/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/peer_connection_observer_impl/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/src/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/UDP/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/WebSocket"
+        "${CMAKE_SOURCE_DIR}/ffmpeg"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Codec"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p"
 
         "/usr/include/"
         "/usr/local/lib/"
@@ -1859,9 +1855,9 @@ list(APPEND p2p_video_channel_srcs
         ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Capturer/vcm_capturer.cc
         ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Capturer/test_video_capturer.cc
         ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/MyAudioCapturer.cpp
-        #        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Capturer/VideoEncoder.cpp
-
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Engines/WebSocketEngine.cpp)
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Codec/rtcVideoEncoder.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Engines/WebSocketEngine.cpp
+        )
 
 #add_library(p2p STATIC ${p2p_data_channel_srcs})
 #target_compile_definitions(p2p PRIVATE BUILDING_p2p)
@@ -1921,8 +1917,7 @@ target_link_libraries(ffmpeg
         swscale
         avutil
         p2p
-#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p
-        )
+)
 
 target_link_libraries(ffmpeg webrtc_linux 
         libx264
@@ -1944,7 +1939,6 @@ target_link_libraries(ffmpeg webrtc_linux
         -lssl
         -lcrypto
         -ldl
-
         -lasound
         -lsndio
         -lpulse

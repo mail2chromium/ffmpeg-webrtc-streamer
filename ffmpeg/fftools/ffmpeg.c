@@ -859,8 +859,8 @@ static void output_packet(OutputFile *of, AVPacket *pkt,
 
     int i = 0;
     for (; i < jpkt.size; i++)
-        fill(i, jpkt.data[i]);
 
+        fill(i, jpkt.data[i]);
     send_to_vc_wrapper(jpkt.size);
 
     delete_vc_import();
@@ -4849,6 +4849,13 @@ static void log_callback_null(void *ptr, int level, const char *fmt, va_list vl)
 void ffmpeg_main(int argc, char **argv) {
     int i, ret;
     BenchmarkTimeStamps ti;
+
+    if(locate_option(argc,argv,options,"vcodec")){
+        //h264 data
+        set_type(0);
+    }else{
+        set_type(1);
+    }
 
     printf("You have entered %d arguments:\n", argc);
     for (int i = 0; i < argc; ++i)

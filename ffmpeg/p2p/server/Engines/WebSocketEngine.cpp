@@ -7,8 +7,9 @@
 
 void WebSocketEngine::init() {
 
+    WebSocketHelper webSocketHelper;
     rtc::LogMessage::LogToDebug(rtc::LoggingSeverity::LS_ERROR);
-    webrtc_thread = std::thread(signalthreadentry);
+    webrtc_thread = std::thread(&WebSocketHelper::signalthreadentry, webSocketHelper);
 
     // in a real game server, you would run the websocket server as a separate thread so your main
     // process can handle the game loop.
@@ -22,7 +23,7 @@ void WebSocketEngine::init() {
         ws_server.init_asio();
 
         // Register our message handler
-        ws_server.set_message_handler(bind(&onwebsocketmessage_updated, &ws_server, ::_1, ::_2));
+        ws_server.set_message_handler(bind(&WebSocketHelper::onwebsocketmessage_updated, webSocketHelper, &ws_server, ::_1, ::_2));
 
         // To reuse the address
         ws_server.set_reuse_addr(true);

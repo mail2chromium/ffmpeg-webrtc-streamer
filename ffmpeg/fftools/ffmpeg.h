@@ -671,6 +671,7 @@ int hwaccel_decode_init(AVCodecContext *avctx);
 void ffmpeg_main(int,char**);
 
 void send_to_vc_wrapper(int);
+void set_type(int);
 void init(int);
 void fill(int, uint8_t);
 void delete_vc_import();
