@@ -93,10 +93,10 @@ private:
 };
 
 
-class FVideoEncoderFactory : public webrtc::VideoEncoderFactory
+class CustomVideoEncoderFactory : public webrtc::VideoEncoderFactory
 {
 public:
-    explicit FVideoEncoderFactory(IVideoEncoderObserver& videoSource);
+    explicit CustomVideoEncoderFactory(IVideoEncoderObserver& videoSource);
 
 /**
      * This is used from the FClientSession::OnSucess to let the factory know

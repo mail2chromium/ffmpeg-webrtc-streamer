@@ -36,7 +36,7 @@ extern rtc::scoped_refptr<webrtc::PeerConnectionInterface> peer_connection;
 class WebSocketHelper : public IVideoEncoderObserver {
 
 private:
-    FVideoEncoderFactory* VideoEncoderFactory = nullptr;
+    CustomVideoEncoderFactory* VideoEncoderFactory = nullptr;
 
 public:
     // IVideoEncoderObserver

@@ -99,7 +99,7 @@ void WebSocketHelper::signalthreadentry() {
         RTC_LOG(LS_ERROR)<<"h264 factory";
 
         //    Create VideoEncoder H264
-        auto video_encoder_factory = std::make_unique<FVideoEncoderFactory>(*this);
+        auto video_encoder_factory = std::make_unique<CustomVideoEncoderFactory>(*this);
 //    VideoEncoderFactory = video_encoder_factory.get();
 
 //    webrtc::SdpVideoFormat video_format("H264");

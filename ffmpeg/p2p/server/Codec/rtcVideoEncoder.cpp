@@ -53,16 +53,16 @@ namespace {
 
 //////////////////////////////////////////////////////////////////////////
 //
-// FVideoEncoderFactory
+// CustomVideoEncoderFactory
 //
 //////////////////////////////////////////////////////////////////////////
 
-FVideoEncoderFactory::FVideoEncoderFactory(IVideoEncoderObserver &VideoSource)
+CustomVideoEncoderFactory::CustomVideoEncoderFactory(IVideoEncoderObserver &VideoSource)
         : VideoSource(&VideoSource) {
 }
 
 
-std::vector<webrtc::SdpVideoFormat> FVideoEncoderFactory::GetSupportedFormats() const {
+std::vector<webrtc::SdpVideoFormat> CustomVideoEncoderFactory::GetSupportedFormats() const {
 
     return {
 //            CreateH264Format(webrtc::H264::kProfileHigh, webrtc::H264::kLevel5_1),
@@ -75,14 +75,14 @@ std::vector<webrtc::SdpVideoFormat> FVideoEncoderFactory::GetSupportedFormats() 
 }
 
 webrtc::VideoEncoderFactory::CodecInfo
-FVideoEncoderFactory::QueryVideoEncoder(const webrtc::SdpVideoFormat &Format) const {
+CustomVideoEncoderFactory::QueryVideoEncoder(const webrtc::SdpVideoFormat &Format) const {
     CodecInfo Info;
     Info.is_hardware_accelerated = true;
     Info.has_internal_source = false;
     return Info;
 }
 
-std::unique_ptr<webrtc::VideoEncoder> FVideoEncoderFactory::CreateVideoEncoder(const webrtc::SdpVideoFormat &Format) {
+std::unique_ptr<webrtc::VideoEncoder> CustomVideoEncoderFactory::CreateVideoEncoder(const webrtc::SdpVideoFormat &Format) {
 //	FClientSession* Session;
 //	bool res = PendingClientSessions.Pop(Session, 0);
 //	checkf(res, TEXT("no client session associated with encoder instance"   ));
