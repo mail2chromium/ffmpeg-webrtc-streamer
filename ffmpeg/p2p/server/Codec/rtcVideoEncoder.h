@@ -1,4 +1,4 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+// Copyright Ottoman 2022, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -16,10 +16,10 @@ public:
 	virtual void SetRate(uint32_t BitrateKbps, uint32_t Framerate) = 0;
 };
 
-class FVideoEncoder : public webrtc::VideoEncoder
+class CustomVideoEncoder : public webrtc::VideoEncoder
 {
 public:
-	explicit FVideoEncoder(IVideoEncoderObserver& Observer);
+	explicit CustomVideoEncoder(IVideoEncoderObserver& Observer);
 
 	void SetQualityControlOwnership(bool bOwnership);
 	bool HasQualityControlOwnership();
@@ -88,7 +88,7 @@ private:
 
 	*/
 	//EncoderInfo encoder_info;
-    std::unique_ptr<FVideoEncoder> video_encoder;
+    std::unique_ptr<CustomVideoEncoder> video_encoder;
 
 };
 
@@ -101,7 +101,7 @@ public:
 /**
      * This is used from the FClientSession::OnSucess to let the factory know
      * what session the next created encoder should belong to.
-     * It allows us to get the right FClientSession <-> FVideoEncoder relationship
+     * It allows us to get the right FClientSession <-> CustomVideoEncoder relationship
      */
 
     //

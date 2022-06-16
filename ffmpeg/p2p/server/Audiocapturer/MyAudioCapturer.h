@@ -1,4 +1,4 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+// Copyright Ottoman 2022, Inc. All Rights Reserved.
 
 #pragma once
 
