@@ -9,14 +9,12 @@ if [ -d "$DEST" ]; then
     echo "Directory found. Lets make it and proceed..."
     cd build
     make
-    cp ./ffmpeg ..
 
-  else
+else
     # It is a directory #
     echo "Directory not found. Lets proceed..."
     mkdir build && cd build
     cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ..
     make
-    cp ./ffmpeg ..
 #  fi
 fi
