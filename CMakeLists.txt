@@ -1892,7 +1892,7 @@ target_compile_definitions(avdevice PRIVATE DBUILDING_avdevice)
 add_library(libx264 STATIC IMPORTED)
 set_target_properties(libx264 PROPERTIES IMPORTED_LOCATION
         #        /home/webrtc/x264/libx264.a
-        ${CMAKE_SOURCE_DIR}/ffmpeg/x264/ffmpeg_build/lib/libx264.a
+        ${CMAKE_SOURCE_DIR}/x264/ffmpeg_build/lib/libx264.a
         )
 
 add_library(webrtc_linux STATIC IMPORTED)
