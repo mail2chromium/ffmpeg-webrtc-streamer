@@ -44,5 +44,5 @@ sudo apt-get install libxcb-xfixes0-dev -y
 sudo apt-get install liblzma-dev -y
 
 sudo apt-get install nasm
-rm -rf ./ffmpeg/x264
-cd ./ffmpeg && git -C x264 pull 2> /dev/null || git clone --depth 1 https://code.videolan.org/videolan/x264.git && cd x264 && PATH="./bin:$PATH" PKG_CONFIG_PATH="./ffmpeg_build/lib/pkgconfig" ./configure --prefix="./ffmpeg_build" --bindir="./bin" --enable-static --enable-pic && PATH="./bin:$PATH" make && make install
+rm -rf ./x264
+git -C x264 pull 2> /dev/null || git clone --depth 1 https://code.videolan.org/videolan/x264.git && cd x264 && PATH="./bin:$PATH" PKG_CONFIG_PATH="./ffmpeg_build/lib/pkgconfig" ./configure --prefix="./ffmpeg_build" --bindir="./bin" --enable-static --enable-pic && PATH="./bin:$PATH" make && make install
