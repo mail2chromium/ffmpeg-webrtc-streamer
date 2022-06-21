@@ -2,8 +2,6 @@
 
 # Copyright 2022 ottoman, All Rights Reserved.
 
-sudo su
-
 echo "Streamer setup has been initiated..."
 
 sudo apt update -y
@@ -11,6 +9,7 @@ sudo apt install build-essential -y
 sudo apt install g++ -y
 sudo apt install gcc -y
 sudo apt install git -y
+sudo apt install cmake -y
 sudo apt-get update && sudo apt-get -y install git python -y
 
 echo "\nBuild Essentials have been installed.\n"
@@ -46,3 +45,4 @@ sudo apt-get install liblzma-dev -y
 sudo apt-get install nasm
 rm -rf ./x264
 git -C x264 pull 2> /dev/null || git clone --depth 1 https://code.videolan.org/videolan/x264.git && cd x264 && PATH="./bin:$PATH" PKG_CONFIG_PATH="./ffmpeg_build/lib/pkgconfig" ./configure --prefix="./ffmpeg_build" --bindir="./bin" --enable-static --enable-pic && PATH="./bin:$PATH" make && make install
+cd ..

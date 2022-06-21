@@ -7,7 +7,7 @@ includedir=${prefix}/include
 SYS_ARCH=X86_64
 SYS=LINUX
 CC=gcc
-CFLAGS=-Wno-maybe-uninitialized -Wshadow -O3 -ffast-math -m64  -Wall -I. -I$(SRCPATH) -std=gnu99 -D_GNU_SOURCE -mpreferred-stack-boundary=6  -I/usr/include/x86_64-linux-gnu  -I/usr/include/x86_64-linux-gnu -fPIC -fomit-frame-pointer -fno-tree-vectorize -fvisibility=hidden
+CFLAGS=-Wno-maybe-uninitialized -Wshadow -O3 -ffast-math -m64  -Wall -I. -I$(SRCPATH) -std=gnu99 -D_GNU_SOURCE -mpreferred-stack-boundary=6 -fPIC -fomit-frame-pointer -fno-tree-vectorize -fvisibility=hidden
 CFLAGSSO=
 CFLAGSCLI=
 COMPILER=GNU
@@ -16,7 +16,7 @@ DEPMM=-MM -g0
 DEPMT=-MT
 LD=gcc -o 
 LDFLAGS=-m64  -lm -lpthread -ldl
-LDFLAGSCLI=-ldl  -lavformat -lavcodec -lavutil  -lswscale -lavutil 
+LDFLAGSCLI=-ldl 
 LIBX264=libx264.a
 CLI_LIBX264=$(LIBX264)
 AR=gcc-ar rc 

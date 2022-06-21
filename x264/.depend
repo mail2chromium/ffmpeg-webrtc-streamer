@@ -77,9 +77,6 @@ filters/video/crop.o: filters/video/crop.c filters/video/video.h \
 input/avs.o: input/avs.c input/input.h x264cli.h common/base.h \
  common/osdep.h config.h x264.h x264_config.h common/cpu.h \
  common/tables.h extras/avisynth_c.h
-input/lavf.o: input/lavf.c input/input.h x264cli.h common/base.h \
- common/osdep.h config.h x264.h x264_config.h common/cpu.h \
- common/tables.h
 example.o: example.c x264.h x264_config.h
 common/mc-8.o: common/mc.c common/common.h common/base.h common/osdep.h \
  config.h x264.h x264_config.h common/cpu.h common/tables.h \

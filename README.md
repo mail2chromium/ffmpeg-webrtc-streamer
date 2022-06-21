@@ -1,5 +1,5 @@
 # ffmpeg-webrtc-streamer
-Stream FFMPEG based Audio and Video using WebRtc. It is the most fastest P2P based streamer which gets Audio and Video from FFMPEG and then stream it to **WebRtc Endpoints** (Android, iOS, Web) and **Media Servers** (Ant-Media, Janus, Jitsi, Kurento)
+Stream FFMPEG based Audio and Video using WebRtc. It is the most fastest P2P based streamer which gets Audio and Video from FFMPEG and then stream it to **WebRtc Endpoints** (Android, iOS, Web) and **Media Servers** like *Ant-Media*.
 
 
 ## Quick Usage:
@@ -12,9 +12,13 @@ If you are running this first time. Just run the following commands to get execu
   
   cd ffmpeg-webrtc-streamer/
 
-  chmod +x Setup.sh && ./Setup.sh # No need, if you have already has run this file
+  sed -i -e 's/\r$//' Setup.sh && chmod +x Setup.sh
 
-  chmod +x run-install.sh && ./run-install.sh
+  ./Setup.sh # No need, if you have already has run this file
+
+  sed -i -e 's/\r$//' run-install.sh && chmod +x run-install.sh
+
+  ./run-install.sh
 
 ```
 
@@ -96,6 +100,7 @@ if [ -d "$DEST" ]; then
     # It is a symbolic links #
     echo "Directory found. Lets make it and proceed..."
     cd build
+    cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ..
     make
 
 else
