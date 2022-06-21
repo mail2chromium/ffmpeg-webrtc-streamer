@@ -28,6 +28,9 @@ sudo apt-get install libstdc++-dev -y
 sudo apt-get install libstdc++-4.8-dev -y
 sudo apt-get install libwebsocketpp-dev -y
 sudo apt-get install nlohmann-json-dev -y
+# Enable the repository
+sudo add-apt-repository ppa:team-xbmc/ppa
+sudo apt-get update
 sudo apt-get install nlohmann-json3-dev -y
 sudo apt-get install libsndio-dev -y
 sudo apt-get install -y clang libc++-dev libc++abi-dev -y
@@ -41,6 +44,7 @@ sudo apt-get install libxcb-shm-dev -y
 sudo apt-get install libsdl-dev libxcb1-dev libxcb-image0-dev libxcb-icccm4-dev libxcb-keysyms1-dev -y
 sudo apt-get install libxcb-xfixes0-dev -y
 sudo apt-get install liblzma-dev -y
+sudo apt install libx264-dev -y
 
 sudo apt-get install nasm
 rm -rf ./x264
