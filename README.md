@@ -12,6 +12,8 @@ If you are running this first time. Just run the following commands to get execu
   
   $ cd ffmpeg-webrtc-streamer/
 
+  $ git checkout stable_v1
+
   $ chmod +x Setup.sh
 
   $ ./Setup.sh # No need, if you have already has run this file
