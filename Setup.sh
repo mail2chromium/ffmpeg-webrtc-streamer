@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Copyright 2022 ottoman, All Rights Reserved.
 
 echo "Streamer setup has been initiated..."

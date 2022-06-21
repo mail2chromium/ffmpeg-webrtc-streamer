@@ -8,17 +8,17 @@ Stream FFMPEG based Audio and Video using WebRtc. It is the most fastest P2P bas
 If you are running this first time. Just run the following commands to get executables:
 
 ```
-  git clone https://github.com/mail2chromium/ffmpeg-webrtc-streamer.git
+  $ git clone https://github.com/mail2chromium/ffmpeg-webrtc-streamer.git
   
-  cd ffmpeg-webrtc-streamer/
+  $ cd ffmpeg-webrtc-streamer/
 
-  sed -i -e 's/\r$//' Setup.sh && chmod +x Setup.sh
+  $ chmod +x Setup.sh
 
-  ./Setup.sh # No need, if you have already has run this file
+  $ ./Setup.sh # No need, if you have already has run this file
 
-  sed -i -e 's/\r$//' run-install.sh && chmod +x run-install.sh
+  $ chmod +x run-install.sh
 
-  ./run-install.sh
+  $ ./run-install.sh
 
 ```
 
@@ -26,17 +26,17 @@ Run the streamer
 
 ```
 # Path to executable
-  cd build/
+  $ cd build/
 
 # To get raw video frames and stream using webrtc
 
-  ./ffmpeg -re -y -f v4l2 -framerate 25 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 512k -s 640x480 -c:v rawvideo -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 output.yuv
+  $ ./ffmpeg -re -y -f v4l2 -framerate 25 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 512k -s 640x480 -c:v rawvideo -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 output.yuv
 
 
 # To get h264 encoded video frames and stream using webrtc
 
 
-  ./ffmpeg -re -y -f v4l2 -framerate 60 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 1024k -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 -vcodec h264 output.yuv
+  $ ./ffmpeg -re -y -f v4l2 -framerate 60 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 1024k -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 -vcodec h264 output.yuv
 
 ```
 
@@ -57,9 +57,9 @@ Simply clone the project using the following command;
 
 ```
 
-  git clone https://github.com/mail2chromium/ffmpeg-webrtc-streamer.git
+  $ git clone https://github.com/mail2chromium/ffmpeg-webrtc-streamer.git
   
-  cd ffmpeg-webrtc-streamer/
+  $ cd ffmpeg-webrtc-streamer/
 
 ```
 
@@ -69,7 +69,7 @@ I have added all the necessary packages into a `Setup.sh` file which is present 
 
 ```
 
-  ./Setup.sh
+  $ ./Setup.sh
 
 ```
 
@@ -82,7 +82,7 @@ Make sure you are in project main directory `ffmpeg-webrtc-streamer`. For Build 
 
 ```
 
-  chmod +x run-install.sh && ./run-install.sh
+  $ chmod +x run-install.sh && ./run-install.sh
 
 ```
 
@@ -123,13 +123,13 @@ Once the build and compilation is done, you can find the executable of ffmpeg in
 ```
 # To get raw video frames and stream using webrtc
 
-  ./ffmpeg -re -y -f v4l2 -framerate 25 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 512k -s 640x480 -c:v rawvideo -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 output.yuv
+  $ ./ffmpeg -re -y -f v4l2 -framerate 25 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 512k -s 640x480 -c:v rawvideo -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 output.yuv
 
 
 # To get h264 encoded video frames and stream using webrtc
 
 
-  ./ffmpeg -re -y -f v4l2 -framerate 60 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 1024k -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 -vcodec h264 output.yuv
+  $ ./ffmpeg -re -y -f v4l2 -framerate 60 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 1024k -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 -vcodec h264 output.yuv
 
 ```
 
