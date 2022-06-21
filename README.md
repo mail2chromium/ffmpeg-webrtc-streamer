@@ -16,7 +16,7 @@ If you are running this first time. Just run the following commands to get execu
 
   $ chmod +x Setup.sh
 
-  $ ./Setup.sh # No need, if you have already has run this file
+  $ ./Setup.sh
 
   $ chmod +x run-install.sh
 
