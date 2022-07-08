@@ -141,11 +141,11 @@ int main(void) {
 //    string input;
 //    {
 ////        cout << "Enter the wave file name: ";
-//        std::string input = "/home/webrtc-2/Desktop/webrtc-cpp-teamwork/out.ogg";
+//        std::string input = "/home/ottoman/Desktop/webrtc-cpp-teamwork/out.ogg";
 ////        cin.get();
 //        filePath = input.c_str();
 //    }
-//    FILE* fp = fopen("/home/webrtc-2/Desktop/webrtc-cpp-teamwork/out.ogg", "r");
+//    FILE* fp = fopen("/home/ottoman/Desktop/webrtc-cpp-teamwork/out.ogg", "r");
 //    if (fp == NULL)
 //    {
 //        fprintf(stderr, " file cannot be open %s \n", filePath);

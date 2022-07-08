@@ -3,13 +3,19 @@
 #pragma once
 
 #include "../src/WebRTCProxyCommon.h"
-
+#include "ringbuffer.h"
 
 class MyAudioCapturer : public webrtc::AudioDeviceModule {
 public:
+    RingBuffer *ring_;
+
+    MyAudioCapturer() {
+        ////// Allocating Ring Buffer
+        ring_ = RingBuffer_Malloc(1048576);
+    }
     void ProcessPacket(
 //            PixelStreamingProtocol::EToProxyMsg PkType,
-            const void *Data, uint32_t Size);
+            const void *Data, uint32_t Size, bool);
 
     //
     // webrtc::AudioDeviceModule interface
