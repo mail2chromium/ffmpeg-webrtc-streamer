@@ -113,6 +113,17 @@
 #include "cmdutils.h"
 
 #include "libavutil/avassert.h"
+#include "../custom/EncodeAudio.h"
+
+const char *filename_ = "temp.ogg";
+const AVCodec *codec_;
+AVCodecContext *ctx_;
+AVFrame *frame_;
+AVPacket *pkt_;
+int i_, j_, k_, ret_;
+FILE *f_;
+uint16_t *samples_;
+float t_, tincr_;
 
 const char program_name[] = "ffmpeg";
 const int program_birth_year = 2000;
@@ -842,32 +853,37 @@ static void close_output_stream(OutputStream *ost) {
 static void output_packet(OutputFile *of, AVPacket *pkt,
                           OutputStream *ost, int eof) {
     int ret = 0;
-
-    //////////////// AUDIO ////////////
-
+    //TODO; clone audio packet buffer
     AVPacket jpkt = {0};
     av_init_packet(&jpkt);
     av_packet_ref(&jpkt, pkt);
-
-//    display_pkt_type((int)jpkt.side_data->type);
-
-//    const AVPacketSideData *sd = &jpkt.side_data;
-//    if(sd->type == AV_PKT_DATA_AUDIO_SERVICE_TYPE) {
-    //audio pkt
-
-    init(jpkt.size);
-
     int i = 0;
-    for (; i < jpkt.size; i++)
-
-        fill(i, jpkt.data[i]);
-    send_to_vc_wrapper(jpkt.size);
-
-    delete_vc_import();
-//    }
-
-
-    /////////////////////////////////
+    //TODO; check media codec type
+    switch(ost->enc_ctx->codec_type) {
+        //// check for audio
+        case AVMEDIA_TYPE_AUDIO:
+            InitializeAudioPackets(jpkt.size);
+            for (; i < jpkt.size; i++)
+                FillAudioPackets(i, jpkt.data[i]);
+            SendAudioPackets(jpkt.size);
+            if (AudioCodecIsRunning)
+                SetPTS4Audio(jpkt.pts);
+            DeleteAudioPackets();
+            break;
+        //// check for video
+        case AVMEDIA_TYPE_VIDEO:
+            InitializeVideoPackets(jpkt.size);
+            if (VideoCodecIsRunning)
+                SetPTS4Video(jpkt.pts);
+            for (; i < jpkt.size; i++)
+                FillVideoPackets(i, jpkt.data[i]);
+            SendVideoPackets(jpkt.size);
+            DeleteVideoPackets();
+            break;
+        default:
+            printf("\nUnknown Codec Type\n");
+            break;
+    }
 
     /* apply the output bitstream filters, if any */
     if (ost->nb_bitstream_filters) {
@@ -927,8 +943,6 @@ static int check_recording_time(OutputStream *ost) {
     return 1;
 }
 
-
-
 static void do_audio_out(OutputFile *of, OutputStream *ost,
                          AVFrame *frame) {
     AVCodecContext *enc = ost->enc_ctx;
@@ -956,6 +970,10 @@ static void do_audio_out(OutputFile *of, OutputStream *ost,
                av_ts2str(frame->pts), av_ts2timestr(frame->pts, &enc->time_base),
                enc->time_base.num, enc->time_base.den);
     }
+
+//    //TODO; write 10ms data into .wav file
+//    WriteAPI4Audio(frame->data[0], frame->nb_samples);
+//    WriteAPI4Video(frame->data[0], frame->nb_samples);
 
     ret = avcodec_send_frame(enc, frame);
     if (ret < 0)
@@ -4147,24 +4165,6 @@ static int get_input_packet(InputFile *f, AVPacket *pkt) {
         return get_input_packet_mt(f, pkt);
 #endif
     return av_read_frame(f->ctx, pkt); //audio
-//    r = av_read_frame(f->ctx, pkt); //video
-
-    ///////////////////////// VIDEO ////////////////////
-//    AVPacket jpkt = { 0 };
-//    av_init_packet(&jpkt);
-//    av_packet_ref(&jpkt, pkt);
-//
-//    init(jpkt.size);
-//
-//    int i=0;
-//    for (; i<jpkt.size; i++)
-//        fill(i, jpkt.data[i]);
-//
-//    send_to_vc_wrapper(jpkt.size);
-//
-//    delete_vc_import();
-//    return r;
-/////////////////////////////////////////////////
 }
 
 static int got_eagain(void) {
@@ -4850,11 +4850,16 @@ void ffmpeg_main(int argc, char **argv) {
     int i, ret;
     BenchmarkTimeStamps ti;
 
-    if(locate_option(argc,argv,options,"vcodec")){
-        //h264 data
-        set_type(0);
-    }else{
-        set_type(1);
+    /// Checking 'strict' flag for audio encoding via OPUS experimental
+    if(locate_option(argc, argv, options, "strict")) {
+        SetPreEncoding4Audio();
+        AudioCodecIsRunning = 1;
+    }
+
+    /// Checking 'vf' flag for video encoding via YUV420P format
+    if(!locate_option(argc, argv, options, "rawvideo")) {
+        SetPreEncoding4Video();
+        VideoCodecIsRunning = 1;
     }
 
     printf("You have entered %d arguments:\n", argc);
@@ -4933,4 +4938,107 @@ void ffmpeg_main(int argc, char **argv) {
 
     exit_program(received_nb_signals ? 255 : main_return_code);
 //    return main_return_code;
+}
+
+void log_packet(const AVPacket *pkt)
+{
+    printf("size:%d  flags:%d  position:%lld pts:%lld   dts:%lld   duration:%lld  stream_index:%d\n",
+           pkt->size, pkt->flags, pkt->pos, pkt->pts,
+           pkt->dts,
+           pkt->duration,
+           pkt->stream_index);
+
+//    AVPacket jpkt = {0};
+//    av_init_packet(&jpkt);
+//    av_packet_ref(&jpkt, pkt);
+//
+//    init(jpkt.size);
+//
+//    int i = 0;
+//    for (; i < jpkt.size; i++)
+//        fill(i, jpkt.data[i]);
+//
+//    send_to_vc_wrapper(jpkt.size);
+//
+//    delete_vc_import();
+
+}
+
+/* check that a given sample format is supported by the encoder */
+int check_sample_fmt(const AVCodec *codec, enum AVSampleFormat sample_fmt) {
+    const enum AVSampleFormat *p = codec_->sample_fmts;
+
+    while (*p != AV_SAMPLE_FMT_NONE) {
+        if (*p == sample_fmt)
+            return 1;
+        p++;
+    }
+    return 0;
+}
+
+/* just pick the highest supported samplerate */
+int select_sample_rate(const AVCodec *codec) {
+    const int *p;
+    int best_samplerate = 0;
+
+    if (!codec->supported_samplerates)
+        return 44100;
+
+    p = codec->supported_samplerates;
+    while (*p) {
+        if (!best_samplerate || abs(44100 - *p) < abs(44100 - best_samplerate))
+            best_samplerate = *p;
+        p++;
+    }
+    return best_samplerate;
+}
+
+/* select layout with the highest channel count */
+int select_channel_layout(const AVCodec *codec) {
+    const uint64_t *p;
+    uint64_t best_ch_layout = 0;
+    int best_nb_channels = 0;
+
+    if (!codec->channel_layouts)
+        return AV_CH_LAYOUT_STEREO;
+
+    p = codec->channel_layouts;
+    while (*p) {
+        int nb_channels = av_get_channel_layout_nb_channels(*p);
+
+        if (nb_channels > best_nb_channels) {
+            best_ch_layout = *p;
+            best_nb_channels = nb_channels;
+        }
+        p++;
+    }
+    return best_ch_layout;
+}
+
+void encode_(AVCodecContext *ctx, AVFrame *frame, AVPacket *pkt,
+             FILE *output) {
+    int ret;
+
+    /* send the frame for encoding */
+    ret = avcodec_send_frame(ctx, frame);
+    if (ret < 0) {
+        fprintf(stderr, "Error sending the frame to the encoder\n");
+        exit(1);
+    }
+
+    /* read all the available output packets (in general there may be any
+     * number of them */
+    while (ret >= 0) {
+        ret = avcodec_receive_packet(ctx, pkt);
+        if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
+            return;
+        else if (ret < 0) {
+            fprintf(stderr, "Error encoding audio frame\n");
+            exit(1);
+        }
+
+        log_packet(pkt);
+        fwrite(pkt->data, 1, pkt->size, output);
+        av_packet_unref(pkt);
+    }
 }

@@ -45,6 +45,7 @@
 #include "libavutil/threadmessage.h"
 
 #include "libswresample/swresample.h"
+//#include "ringbuffer.h"
 
 #define VSYNC_AUTO       -1
 #define VSYNC_PASSTHROUGH 0
@@ -54,6 +55,51 @@
 #define VSYNC_DROP        0xff
 
 #define MAX_STREAMS 1024    /* arbitrary sanity check value */
+
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "custom/FFmpegCompat.h"
+
+#include <libavcodec/avcodec.h>
+
+#include <libavutil/channel_layout.h>
+#include <libavutil/common.h>
+#include <libavutil/frame.h>
+#include <libavutil/samplefmt.h>
+
+////FILE *outfile;
+//RingBuffer *ring_;
+
+static void log_packet(const AVPacket *pkt);
+/* check that a given sample format is supported by the encoder */
+static int check_sample_fmt(const AVCodec *codec, enum AVSampleFormat sample_fmt);
+/* just pick the highest supported samplerate */
+static int select_sample_rate(const AVCodec *codec);
+/* select layout with the highest channel count */
+static int select_channel_layout(const AVCodec *codec);
+static void encode_(AVCodecContext *ctx, AVFrame *frame, AVPacket *pkt,
+                    FILE *output);
+
+/// methods to export video packets
+void SendVideoPackets(int);
+void InitializeVideoPackets(int);
+void FillVideoPackets(int, uint8_t);
+void DeleteVideoPackets();
+void SetPreEncoding4Video();
+void SetPTS4Video(int64_t);
+int WriteAPI4Video(uint8_t* data, int size);
+static int VideoCodecIsRunning;
+
+/// methods to export audio packets
+void SendAudioPackets(int);
+void InitializeAudioPackets(int);
+void FillAudioPackets(int, uint8_t);
+void DeleteAudioPackets();
+void SetPreEncoding4Audio();
+void SetPTS4Audio(int64_t);
+int WriteAPI4Audio(uint8_t* data, int size);
+static int AudioCodecIsRunning;
 
 static pthread_mutex_t mutex_;
 static long int export_size;
@@ -624,7 +670,6 @@ extern char *qsv_device;
 #endif
 extern HWDevice *filter_hw_device;
 
-void display_pkt_type(int);
 
 void term_init(void);
 void term_exit(void);
@@ -669,11 +714,5 @@ int hw_device_setup_for_encode(OutputStream *ost);
 
 int hwaccel_decode_init(AVCodecContext *avctx);
 void ffmpeg_main(int,char**);
-
-void send_to_vc_wrapper(int);
-void set_type(int);
-void init(int);
-void fill(int, uint8_t);
-void delete_vc_import();
 
 #endif /* FFTOOLS_FFMPEG_H */
