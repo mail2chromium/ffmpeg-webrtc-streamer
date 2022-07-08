@@ -28,7 +28,7 @@
 #include "video/send_statistics_proxy.h"
 
 namespace webrtc {
-    extern std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>> video_stream_encoder_extern;
+extern std::unique_ptr<rtc::VideoSinkInterface<VideoFrame>> video_stream_encoder_extern;
 namespace test {
 class VideoSendStreamPeer;
 }  // namespace test

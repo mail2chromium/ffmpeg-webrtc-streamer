@@ -63,8 +63,28 @@ struct ReportBlock {
 
 namespace voe {
 
+extern size_t ffmpeg_encoded_buffer_size;
+extern bool is_ffmpeg_encoding;
+extern uint8_t* ffmpeg_encoded_buffer;
+extern int64_t ffmpeg_av_pkt_pts;
+extern bool is_pre_encoding;
+
 class ChannelSendInterface {
  public:
+
+    /*composite()*/
+    static int16_t* composite() {
+        static thread_local int16_t payload120Ms[1920] = {};
+        return payload120Ms;
+    }
+
+    /*counter()*/
+    static size_t* counter() {
+        static thread_local size_t value = 0;
+        return &value;
+    }
+
+
   virtual ~ChannelSendInterface() = default;
 
   virtual void ReceivedRTCPPacket(const uint8_t* packet, size_t length) = 0;
