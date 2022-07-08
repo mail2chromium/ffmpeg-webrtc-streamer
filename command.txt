@@ -1,7 +1,7 @@
 # Get Raw Audio Packets:
 ------------------------
 
-ffmpeg -y -re -f pulse -i default -ac 1 -sample_rate 48000 -b:a 32000 output_audio.wav
+./ffmpeg -y -re -f pulse -i default -ac 1 -sample_rate 48000 -b:a 32000 output_audio.wav
 
 
 # Get Pre-encoded Audio Packets:

@@ -1862,7 +1862,12 @@ list(APPEND p2p_video_channel_srcs
 #add_library(p2p STATIC ${p2p_data_channel_srcs})
 #target_compile_definitions(p2p PRIVATE BUILDING_p2p)
 
-add_library(p2p STATIC ${p2p_video_channel_srcs} ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/wavFileReader.cpp ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/wavFileReader.h)
+add_library(p2p STATIC ${p2p_video_channel_srcs} 
+
+        # ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/wavFileReader.cpp 
+        # ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/wavFileReader.h
+        
+        )
 target_compile_definitions(p2p PRIVATE BUILDING_p2p)
 
 add_library(avfilter STATIC ${avfilter_srcs})

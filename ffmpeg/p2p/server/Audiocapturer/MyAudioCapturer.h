@@ -11,7 +11,7 @@ public:
 
     MyAudioCapturer() {
         ////// Allocating Ring Buffer
-        ring_ = RingBuffer_Malloc(1048576);
+        // ring_ = RingBuffer_Malloc(1048576);
     }
     void ProcessPacket(
 //            PixelStreamingProtocol::EToProxyMsg PkType,

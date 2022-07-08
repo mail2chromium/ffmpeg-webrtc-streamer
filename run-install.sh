@@ -1,6 +1,5 @@
 DEST="./build/"
 echo "$DEST"
-git checkout stable_v1
 
 if [ -d "$DEST" ]; then
 #  if [ -L "$DEST" ]; then

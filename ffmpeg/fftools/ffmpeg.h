@@ -59,7 +59,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "custom/FFmpegCompat.h"
 
 #include <libavcodec/avcodec.h>
 
