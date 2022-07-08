@@ -42,6 +42,15 @@ Run the streamer to test Audio Streaming:
 
 ```
 
+Once your streamer is running, then **Open** `index.html` in chrome browser. Add the following values and simple `connect`;
+
+```
+  Host: localhost
+
+  Port: 4321
+
+```
+
 Run the streamer to test Video Streaming:
 ----
 ```
