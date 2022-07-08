@@ -12,8 +12,6 @@ If you are running this first time. Just run the following commands to get execu
   
   $ cd ffmpeg-webrtc-streamer/
 
-  $ git checkout stable_v1
-
   $ chmod +x Setup.sh
 
   $ ./Setup.sh
@@ -23,9 +21,29 @@ If you are running this first time. Just run the following commands to get execu
   $ ./run-install.sh
 
 ```
+At this moment, you can only run `Audio Streaming or Video Streaming`. As both are separately handled. But in coming research, Audio and video from `FFMPEG` will be streamed using webrtc at the same time.
 
-Run the streamer
+Run the streamer to test Audio Streaming:
+-----
 
+```
+# Path to executable
+  $ cd build/
+
+# To get raw audio packets and stream using webrtc
+
+  $ ./ffmpeg -y -re -f pulse -i default -ac 1 -sample_rate 48000 -b:a 32000 output_audio.wav
+
+
+# To get pre-encoded audio packets and stream using webrtc
+
+
+  $ ./ffmpeg -re -y -f pulse -channel_layout stereo -i default -c:a opus -strict -2 -sample_rate 48k -b:a 32k out.ogg
+
+```
+
+Run the streamer to test Video Streaming:
+----
 ```
 # Path to executable
   $ cd build/
