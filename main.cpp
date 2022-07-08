@@ -1,5 +1,5 @@
 //
-// Created by ottoman on 5/31/22.
+// Created by Ottoman on 5/31/22.
 //
 
 #include "api/media_types.h"
@@ -31,6 +31,12 @@ int main(int argc, char **argv) {
 
     thread th1(&ffmpeg_main, argc, argv);
 
+    // Main Audio Capturer Bridge
+    AudioCapturer = new rtc::RefCountedObject<MyAudioCapturer>();
+    AudioCapturer->Init();
+    AudioCapturer->InitRecording();
+
+    // Main Signaling Bridge
     WebSocketEngine webSocketEngine;
     webSocketEngine.init();
 

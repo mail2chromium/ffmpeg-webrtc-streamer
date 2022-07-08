@@ -1,11 +1,33 @@
-# get raw video frames
+# Get Raw Audio Packets:
+------------------------
+
+./ffmpeg -y -re -f pulse -i default -ac 1 -sample_rate 48000 -b:a 32000 output_audio.wav
+
+
+# Get Pre-encoded Audio Packets:
+-------------------------------
+
+./ffmpeg -re -y -f pulse -channel_layout stereo -i default -c:a opus -strict -2 -sample_rate 48k -b:a 32k out.ogg
+
+# Get Raw Video Frames:
+-----------------------
 
 ./ffmpeg -re -y -f v4l2 -framerate 25 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 512k -s 640x480 -c:v rawvideo -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 output.yuv
 
 
-
-
-#get h264 encoded video frames
-
+# Get h264 Encoded Video Frames:
+--------------------------------
 
 ./ffmpeg -re -y -f v4l2 -framerate 60 -video_size 640x480 -i /dev/video0 -pix_fmt yuv420p -preset ultrafast -tune zerolatency -r 10 -b:v 1024k -ac 2 -ab 32k -ar 44100 -vf format=yuv420p -update 1 -flush_packets 0 -vcodec h264 output.yuv
+
+
+
+# Get RAW Audio and Video Packets:
+----------------------------------
+
+ffmpeg-re -y-fpulse -i default -fv4l2 -i /dev/video0 -channle_layout 2 -pix_fmt yuv420p-r10 -b:v512k-s640x480-c:v rawvideo -ac 1-sample_rate 48000 -ab 32000-vfformat=yuv420p -update 1 testVideo.yuv testAudio.wav
+
+# Get Pre-encoded Audio and Video Packets:
+------------------------------------------
+
+under process

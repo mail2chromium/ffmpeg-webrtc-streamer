@@ -1696,7 +1696,7 @@ namespace std
 /* #undef _GLIBCXX_USE_PTHREADS_NUM_PROCESSORS_NP */
 
 /* Define if pthread_cond_clockwait is available in <pthread.h>. */
-// #define _GLIBCXX_USE_PTHREAD_COND_CLOCKWAIT 1
+#define _GLIBCXX_USE_PTHREAD_COND_CLOCKWAIT 1
 
 /* Define if pthread_mutex_clocklock is available in <pthread.h>. */
 #define _GLIBCXX_USE_PTHREAD_MUTEX_CLOCKLOCK 1

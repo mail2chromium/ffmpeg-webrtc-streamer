@@ -8,12 +8,16 @@
 #include <iostream>
 #include <string>
 using namespace std;
-//
-extern "C" void send_to_vc_wrapper(int);
-extern "C" void init(int);
-extern "C" void set_type(int);
-extern "C" void fill(int, uint8_t);
-extern "C" void delete_vc_import();
+
+/// methods to export video packets
+extern "C" void SendVideoPackets(int);
+extern "C" void InitializeVideoPackets(int);
+extern "C" void FillVideoPackets(int, uint8_t);
+extern "C" void DeleteVideoPackets();
+extern "C" void SetPreEncoding4Video();
+extern "C" void SetPTS4Video(int64_t);
+extern "C" int WriteAPI4Video(uint8_t* data, int size);
+static int VideoCodecIsRequested;
 
 /*
  *  Copyright (c) 2013 The WebRTC project authors. All Rights Reserved.
