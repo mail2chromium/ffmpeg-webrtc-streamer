@@ -49,64 +49,64 @@ void MyAudioCapturer::ProcessPacket(
     auto uint8_data = static_cast<const uint8_t *>(Data);
     int BytesPer10Ms = (SampleRate * Channels * static_cast<int>(sizeof(uint16_t))) / 100;
 
-    if (is_opus) {
-        //set encoded data and size
-        webrtc::voe::ffmpeg_encoded_buffer_size = Size;
-        for (int i = 0; i < Size; i++) {
-            webrtc::voe::ffmpeg_encoded_buffer[i] = uint8_data[i];
-        }
-        const uint8_t *null_buff = new uint8_t[BytesPer10Ms]();
-        auto PkData = static_cast<const uint8_t *>(null_buff);
-        RecordingBuffer.insert(RecordingBuffer.end(), null_buff, null_buff + BytesPer10Ms);
-        DeviceBuffer->SetRecordedBuffer(RecordingBuffer.data(), BytesPer10Ms / (sizeof(uint16_t) * Channels));
-        DeviceBuffer->DeliverRecordedData();
-        RecordingBuffer.erase(RecordingBuffer.begin(), RecordingBuffer.begin() + BytesPer10Ms);
-        delete null_buff;
-    }
-//    if(is_opus) {
-//        //TODO; insert data into ring buffer and fetch 480 samples
-//        RingBuffer_In(ring_, uint8_data, Size);
-//
-//        uint8_t *in = new uint8_t[960];
-//        if(RingBuffer_Len(ring_) >= 960) {
-//            RingBuffer_Out(ring_, in, 960);
-//        }
-//
-//        /////// Converting uint8_t array to int16_t array
-//        int i = 0;
-//        int16_t *out;
-//        out = new int16_t [960 / 2];
-//
-//        int j = 0;
-//        for (; i < 960; i += 2) {
-//            out[j] = uint8_data[i] << 8 | uint8_data[i + 1];
-//            j++;
-//        }
-//
-//        ////// Encoding audio packets
-//        encoder->Encode(timestamp_, rtc::ArrayView<const int16_t>(out, 480), &encoded);
-//        timestamp_ += 480;
-//
-//        ////// Output payload (encoded)
-//        const rtc::ArrayView<const uint8_t> opayload(encoded.data(), encoded.size());
-//        //set encoded data and size
-//        webrtc::voe::ffmpeg_encoded_buffer_size = opayload.size();
-//        for (int i = 0; i < opayload.size(); i++) {
-//            webrtc::voe::ffmpeg_encoded_buffer[i] = opayload.data()[i];
-//        }
-//        const uint8_t *null_buff = new uint8_t[BytesPer10Ms]();
-//        auto PkData = static_cast<const uint8_t *>(null_buff);
-//
-//        RecordingBuffer.insert(RecordingBuffer.end(), null_buff, null_buff + BytesPer10Ms);
-//
-//        DeviceBuffer->SetRecordedBuffer(RecordingBuffer.data(), BytesPer10Ms / (sizeof(uint16_t) * Channels));
-//        DeviceBuffer->DeliverRecordedData();
-//
-//        RecordingBuffer.erase(RecordingBuffer.begin(), RecordingBuffer.begin() + BytesPer10Ms);
-//        delete null_buff;
-//        delete out;
-//        encoded.Clear();
-//    }
+    // if (is_opus) {
+    //     //set encoded data and size
+    //     webrtc::voe::ffmpeg_encoded_buffer_size = Size;
+    //     for (int i = 0; i < Size; i++) {
+    //         webrtc::voe::ffmpeg_encoded_buffer[i] = uint8_data[i];
+    //     }
+    //     const uint8_t *null_buff = new uint8_t[BytesPer10Ms]();
+    //     auto PkData = static_cast<const uint8_t *>(null_buff);
+    //     RecordingBuffer.insert(RecordingBuffer.end(), null_buff, null_buff + BytesPer10Ms);
+    //     DeviceBuffer->SetRecordedBuffer(RecordingBuffer.data(), BytesPer10Ms / (sizeof(uint16_t) * Channels));
+    //     DeviceBuffer->DeliverRecordedData();
+    //     RecordingBuffer.erase(RecordingBuffer.begin(), RecordingBuffer.begin() + BytesPer10Ms);
+    //     delete null_buff;
+    // }
+   if(is_opus_external) {
+       //TODO; insert data into ring buffer and fetch 480 samples
+       RingBuffer_In(ring_, uint8_data, Size);
+
+       uint8_t *in = new uint8_t[960];
+       if(RingBuffer_Len(ring_) >= 960) {
+           RingBuffer_Out(ring_, in, 960);
+       }
+
+       /////// Converting uint8_t array to int16_t array
+       int i = 0;
+       int16_t *out;
+       out = new int16_t [960 / 2];
+
+       int j = 0;
+       for (; i < 960; i += 2) {
+           out[j] = uint8_data[i] << 8 | uint8_data[i + 1];
+           j++;
+       }
+
+       ////// Encoding audio packets
+       encoder->Encode(timestamp_, rtc::ArrayView<const int16_t>(out, 480), &encoded);
+       timestamp_ += 480;
+
+       ////// Output payload (encoded)
+       const rtc::ArrayView<const uint8_t> opayload(encoded.data(), encoded.size());
+       //set encoded data and size
+       webrtc::voe::ffmpeg_encoded_buffer_size = opayload.size();
+       for (int i = 0; i < opayload.size(); i++) {
+           webrtc::voe::ffmpeg_encoded_buffer[i] = opayload.data()[i];
+       }
+       const uint8_t *null_buff = new uint8_t[BytesPer10Ms]();
+       auto PkData = static_cast<const uint8_t *>(null_buff);
+
+       RecordingBuffer.insert(RecordingBuffer.end(), null_buff, null_buff + BytesPer10Ms);
+
+       DeviceBuffer->SetRecordedBuffer(RecordingBuffer.data(), BytesPer10Ms / (sizeof(uint16_t) * Channels));
+       DeviceBuffer->DeliverRecordedData();
+
+       RecordingBuffer.erase(RecordingBuffer.begin(), RecordingBuffer.begin() + BytesPer10Ms);
+       delete null_buff;
+       delete out;
+       encoded.Clear();
+   }
     else {
         auto PkData = static_cast<const uint8_t *>(Data);
         RecordingBuffer.insert(RecordingBuffer.end(), PkData, PkData + Size);
