@@ -33,7 +33,9 @@
 #define X264_API_IMPORTS 1
 #endif
 
-#include "include/x264.h"
+//#include "/home/webrtc-2/x264/build/include/x264.h"
+//#include "/home/webrtc/ffmpeg_build/include/x264.h"
+#include "x264/ffmpeg_build/include/x264.h"
 #include <float.h>
 #include <math.h>
 #include <stdio.h>

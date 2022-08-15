@@ -253,6 +253,9 @@ int ff_opus_parse_packet(OpusPacket *pkt, const uint8_t *buf, int buf_size,
 
     /* total packet duration cannot be larger than 120ms */
     pkt->frame_duration = opus_frame_duration[pkt->config];
+
+    printf(" \nopus.c: frame_duration is %d\n", pkt->frame_duration);
+
     if (pkt->frame_duration * pkt->frame_count > MAX_PACKET_DUR)
         goto fail;
 

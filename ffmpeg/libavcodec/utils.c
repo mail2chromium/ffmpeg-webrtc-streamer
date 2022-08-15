@@ -694,6 +694,9 @@ int attribute_align_arg avcodec_open2(AVCodecContext *avctx, const AVCodec *code
     avctx->frame_number = 0;
     avctx->codec_descriptor = avcodec_descriptor_get(avctx->codec_id);
 
+    //TODO; opus experimetnal strict compliance settings to '-2'
+    avctx->strict_std_compliance = -2;
+
     if ((avctx->codec->capabilities & AV_CODEC_CAP_EXPERIMENTAL) &&
         avctx->strict_std_compliance > FF_COMPLIANCE_EXPERIMENTAL) {
         const char *codec_string = av_codec_is_encoder(codec) ? "encoder" : "decoder";

@@ -35,6 +35,10 @@
 
 extern const AVClass ffurl_context_class;
 
+/*TODO; declaring C++ extern methods which shall be
+ * called later on through C context*/
+void WS_OPEN(char*, char*);
+
 typedef struct URLContext {
     const AVClass *av_class;    /**< information for av_log(). Set by url_open(). */
     const struct URLProtocol *prot;

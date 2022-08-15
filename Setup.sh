@@ -43,6 +43,7 @@ sudo apt-get install libsdl-dev libxcb1-dev libxcb-image0-dev libxcb-icccm4-dev 
 sudo apt-get install libxcb-xfixes0-dev -y
 sudo apt-get install liblzma-dev -y
 sudo apt install libx264-dev -y
+sudo apt install libopus-dev -y
 
 sudo apt-get install nasm
 rm -rf ./x264

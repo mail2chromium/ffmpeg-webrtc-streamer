@@ -40,6 +40,7 @@ extern "C" {
 #include <libavutil/samplefmt.h>
 }
 
+int out_main(int argc, char **argv);
 
 static void log_packet(const AVPacket *pkt)
 {
@@ -129,7 +130,13 @@ static void encode(AVCodecContext *ctx, AVFrame *frame, AVPacket *pkt,
     }
 }
 
-int main(int argc, char **argv) {
+int main(void) {
+    char *cmd[2] = {"ffmpeg", "myaudio.opus"};
+    out_main(2, cmd);
+    return 0;
+}
+
+int out_main(int argc, char **argv) {
     const char *filename;
     const AVCodec *codec;
     AVCodecContext *c = NULL;
@@ -150,7 +157,7 @@ int main(int argc, char **argv) {
     avcodec_register_all();
 
     /* find the MP2 encoder */
-    codec = avcodec_find_encoder(AV_CODEC_ID_MP3);
+    codec = avcodec_find_encoder(AV_CODEC_ID_OPUS);
 //    codec = avcodec_find_encoder_by_name("libfdk_aac");
     if (!codec) {
         fprintf(stderr, "Codec not found\n");
@@ -167,7 +174,7 @@ int main(int argc, char **argv) {
     c->bit_rate = 64000;
 
     /* check that the encoder supports s16 pcm input */
-    c->sample_fmt = /*AV_SAMPLE_FMT_S16*/AV_SAMPLE_FMT_FLTP;
+    c->sample_fmt = AV_SAMPLE_FMT_FLTP /*AV_SAMPLE_FMT_S16 AV_SAMPLE_FMT_FLTP*/;
 
 //    c->sample_fmt = codec->sample_fmts ?
 //                    codec->sample_fmts[0] : AV_SAMPLE_FMT_FLTP;

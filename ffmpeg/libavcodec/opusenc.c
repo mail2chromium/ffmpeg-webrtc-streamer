@@ -552,6 +552,7 @@ static int opus_encode_frame(AVCodecContext *avctx, AVPacket *avpkt,
         return 0;
 
     frame_size = OPUS_BLOCK_SIZE(s->packet.framesize);
+    printf("\nframe_size for x = %d is %d\n", s->packet.framesize, frame_size);
 
     if (!frame) {
         /* This can go negative, that's not a problem, we only pad if positive */
@@ -631,9 +632,9 @@ static av_cold int opus_encode_init(AVCodecContext *avctx)
      * runtime, so fix it to the lowest possible number of samples and use a queue
      * to accumulate AVFrames until we have enough to encode whatever the encoder
      * decides is the best */
-    avctx->frame_size = 120;
+    avctx->frame_size = 120; //TODO; 120
     /* Initial padding will change if SILK is ever supported */
-    avctx->initial_padding = 120;
+    avctx->initial_padding = 120; //TODO; 120
 
     if (!avctx->bit_rate) {
         int coupled = ff_opus_default_coupled_streams[s->channels - 1];

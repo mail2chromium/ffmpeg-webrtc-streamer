@@ -32,8 +32,11 @@
 #include "libavformat/internal.h"
 #include "pulse_audio_common.h"
 #include "timefilter.h"
+#include "p2p/antmediaclient/Audiocapturer/ringbuffer.h"
 
 #define DEFAULT_CODEC_ID AV_NE(AV_CODEC_ID_PCM_S16BE, AV_CODEC_ID_PCM_S16LE)
+extern RingBuffer *ring_;
+extern int writeAPI(uint8_t*, int);
 
 typedef struct PulseData {
     AVClass *class;
@@ -271,6 +274,7 @@ unlock_and_fail:
 static int pulse_read_packet(AVFormatContext *s, AVPacket *pkt)
 {
     PulseData *pd  = s->priv_data;
+
     int ret;
     size_t read_length;
     const void *read_data = NULL;
@@ -313,6 +317,7 @@ static int pulse_read_packet(AVFormatContext *s, AVPacket *pkt)
         int frame_size = ((av_get_bits_per_sample(codec_id) >> 3) * pd->channels);
         int frame_duration = read_length / frame_size;
 
+//        printf("\n\nframe_size %d channels %d durations %d readlength %d \n\n", frame_size, pd->channels, frame_duration, read_length);
 
         if (negative) {
             dts += latency;
@@ -327,6 +332,25 @@ static int pulse_read_packet(AVFormatContext *s, AVPacket *pkt)
     }
 
     memcpy(pkt->data, read_data, read_length);
+
+//    //TODO; insert data into ring buffer and fetch 480 samples
+//    uint8_t *samples = pkt->data;
+//    RingBuffer_In(ring_, samples, read_length);
+//
+//    if(RingBuffer_Len(ring_) >= 480) {
+//        av_new_packet(pkt, 480);
+//        RingBuffer_Out(ring_, pkt->data, 480);
+//    }
+//
+//    //TODO; write 10ms data into .wav file
+//    writeAPI(pkt->data, pkt->size);
+//
+//    printf("\npulse recorded %d bytes: ", pkt->size);
+//    for (int j = 0; j < pkt->size; j++) {
+//        printf("%d ", pkt->data[j]);
+//    }
+//    printf("\n");
+
     pa_stream_drop(pd->stream);
 
     pa_threaded_mainloop_unlock(pd->mainloop);

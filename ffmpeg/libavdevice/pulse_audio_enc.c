@@ -454,6 +454,7 @@ static av_cold int pulse_write_header(AVFormatContext *h)
 
     if (h->nb_streams != 1 || h->streams[0]->codecpar->codec_type != AVMEDIA_TYPE_AUDIO) {
         av_log(s, AV_LOG_ERROR, "Only a single audio stream is supported.\n");
+
         return AVERROR(EINVAL);
     }
     st = h->streams[0];

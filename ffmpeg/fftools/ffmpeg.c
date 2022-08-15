@@ -113,7 +113,7 @@
 #include "cmdutils.h"
 
 #include "libavutil/avassert.h"
-// #include "../custom/EncodeAudio.h"
+#include "../custom/EncodeAudio.h"
 
 const char *filename_ = "temp.ogg";
 const AVCodec *codec_;
@@ -853,31 +853,40 @@ static void close_output_stream(OutputStream *ost) {
 static void output_packet(OutputFile *of, AVPacket *pkt,
                           OutputStream *ost, int eof) {
     int ret = 0;
+
     //TODO; clone audio packet buffer
     AVPacket jpkt = {0};
     av_init_packet(&jpkt);
     av_packet_ref(&jpkt, pkt);
+
     int i = 0;
+
     //TODO; check media codec type
     switch(ost->enc_ctx->codec_type) {
         //// check for audio
         case AVMEDIA_TYPE_AUDIO:
             InitializeAudioPackets(jpkt.size);
+
             for (; i < jpkt.size; i++)
                 FillAudioPackets(i, jpkt.data[i]);
+
             SendAudioPackets(jpkt.size);
-            if (AudioCodecIsRunning)
-                SetPTS4Audio(jpkt.pts);
+
+            SetPTS4Audio(jpkt.pts);
+
             DeleteAudioPackets();
             break;
         //// check for video
         case AVMEDIA_TYPE_VIDEO:
             InitializeVideoPackets(jpkt.size);
-            if (VideoCodecIsRunning)
-                SetPTS4Video(jpkt.pts);
+
+            SetPTS4Video(jpkt.pts);
+
             for (; i < jpkt.size; i++)
                 FillVideoPackets(i, jpkt.data[i]);
+
             SendVideoPackets(jpkt.size);
+
             DeleteVideoPackets();
             break;
         default:
@@ -910,7 +919,7 @@ static void output_packet(OutputFile *of, AVPacket *pkt,
             /* send it to the next filter down the chain or to the muxer */
             if (idx < ost->nb_bitstream_filters) {
                 ret = av_bsf_send_packet(ost->bsf_ctx[idx], eof ? NULL : pkt);
-                if (ret < 0)
+                 if (ret < 0)
                     goto finish;
                 idx++;
                 eof = 0;
@@ -1169,7 +1178,7 @@ static void do_video_out(OutputFile *of,
             duration += delta0;
             delta0 = 0;
         }
-
+        
         switch (format_video_sync) {
             case VSYNC_VSCFR:
                 if (ost->frame_number == 0 && delta0 >= 0.5) {
@@ -4850,18 +4859,6 @@ void ffmpeg_main(int argc, char **argv) {
     int i, ret;
     BenchmarkTimeStamps ti;
 
-    /// Checking 'strict' flag for audio encoding via OPUS experimental
-    if(locate_option(argc, argv, options, "strict")) {
-        SetPreEncoding4Audio();
-        AudioCodecIsRunning = 1;
-    }
-
-    /// Checking 'vf' flag for video encoding via YUV420P format
-    if(!locate_option(argc, argv, options, "rawvideo")) {
-        SetPreEncoding4Video();
-        VideoCodecIsRunning = 1;
-    }
-
     printf("You have entered %d arguments:\n", argc);
     for (int i = 0; i < argc; ++i)
         printf("%s\n", argv[i]);
@@ -4912,6 +4909,9 @@ void ffmpeg_main(int argc, char **argv) {
 //         av_log(NULL, AV_LOG_FATAL, "At least one input file must be specified\n");
 //         exit_program(1);
 //     }
+
+    for (i = 0; i < nb_output_files; i++)
+        printf("output format is %s\n", output_files[i]->ctx->oformat->name);
 
     for (i = 0; i < nb_output_files; i++) {
         if (strcmp(output_files[i]->ctx->oformat->name, "rtp"))

@@ -59,6 +59,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "custom/FFmpegCompat.h"
 
 #include <libavcodec/avcodec.h>
 
@@ -88,15 +89,18 @@ void DeleteVideoPackets();
 void SetPreEncoding4Video();
 void SetPTS4Video(int64_t);
 int WriteAPI4Video(uint8_t* data, int size);
+void VideoTrackIsRequired();
 static int VideoCodecIsRunning;
 
 /// methods to export audio packets
+void AudioTrackIsRequired();
 void SendAudioPackets(int);
 void InitializeAudioPackets(int);
 void FillAudioPackets(int, uint8_t);
 void DeleteAudioPackets();
 void SetPreEncoding4Audio();
 void SetPTS4Audio(int64_t);
+void set_type(int);
 int WriteAPI4Audio(uint8_t* data, int size);
 static int AudioCodecIsRunning;
 

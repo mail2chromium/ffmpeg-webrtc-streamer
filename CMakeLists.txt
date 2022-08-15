@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(ffmpeg-webrtc-streamer C CXX)
+project(ffmpeg_project C CXX)
 
 # remove -g flag if you want to build release
 set(CMAKE_CXX_STANDARD 14)
@@ -21,6 +21,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wdeclaration-after-statement -Wall -Wdisabl
 message("c flags:\n" ${CMAKE_C_FLAGS})
 
 add_definitions(
+        -DWEBRTC_OPUS_SUPPORT_120MS_PTIME
         -DHAVE_THREADS
         -Wno-deprecated
         -Wno-strict-prototypes
@@ -76,10 +77,11 @@ include_directories(
         "/usr/include/"
         "/usr/include/alsa/"
         "/usr/include/pulse/"
+        "/usr/include/opus"
 
         "${CMAKE_SOURCE_DIR}/ffmpeg"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/x264/ffmpeg_build"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/x264/ffmpeg_build/include"
+        "${CMAKE_SOURCE_DIR}x264/ffmpeg_build"
+        "${CMAKE_SOURCE_DIR}x264/ffmpeg_build/include"
 
         "${CMAKE_SOURCE_DIR}/webrtc/src"
         "${CMAKE_SOURCE_DIR}/webrtc/src/media"
@@ -111,11 +113,65 @@ include_directories(
         "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Codec"
         "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server"
         "${CMAKE_SOURCE_DIR}/ffmpeg/p2p"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Audiocapturer/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Engines/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/peer_connection_observer_impl/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/src/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/WebSocket/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/AntMedia/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Capturer/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Encoder/"
+
+#        "/custom"
+#        "ffmpeg-example/include/compat/"
+#
+#        "/home/webrtc/lib_webrtc/src"
+#        "/home/webrtc/lib_webrtc/src/media"
+#        "/home/webrtc/lib_webrtc/src/media/base"
+#        "/home/webrtc/lib_webrtc/src/api"
+#        "/home/webrtc/lib_webrtc/src/api/video"
+#        "/home/webrtc/lib_webrtc/src/out/Debug"
+#        "/home/webrtc/lib_webrtc/src/out/Debug/bin"
+#        "/home/webrtc/lib_webrtc/src/out/Debug/obj"
+#        "/home/webrtc/lib_webrtc/src/out/Debug/gen"
+#        "/home/webrtc/lib_webrtc/src/third_party/abseil-cpp"
+#        "/home/webrtc/lib_webrtc/src/third_party/libyuv/include"
+#
+#        "/home/webrtc/lib_webrtc/src"
+#        "/home/webrtc/lib_webrtc/test"
+#        "/home/webrtc/lib_webrtc/src/build/out/debug/x64/obj"
+#        "/home/webrtc/lib_webrtc/src/third_party/abseil-cpp"
+#        "/home/webrtc/lib_webrtc/src/third_party/googletest/src/googletest/include"
+#        "/home/webrtc/lib_webrtc/src/third_party/libyuv/include"
+#        "/home/webrtc/lib_webrtc/src/third_party/libvpx/source/libvpx"
+#        "/home/webrtc/lib_webrtc/src/third_party/libvpx/source/libvpx/vpx"
+#        "/home/webrtc/lib_webrtc/src/third_party/jsoncpp/source/include"
+#        "/home/webrtc/lib_webrtc/src/base"
+#        "/home/webrtc/lib_webrtc/src/media/base"
+#        "/home/webrtc/lib_webrtc/src/media/engine"
+#        "/home/webrtc/lib_webrtc/src/pc"
+
+#        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/client/"
+#        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/Engines"
+#        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/DataChannel/"
+#        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/peer_connection_observer_impl/"
+#        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/src/"
+#        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/UDP/"
+#        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/WebSocket"
+
+        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Audiocapturer/"
+        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Engines/"
+        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/peer_connection_observer_impl/"
+        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/src/"
+        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/WebSocket/"
+        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/AntMedia/"
+        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Capturer/"
+        "/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Encoder/"
 
         "/usr/include/"
         "/usr/local/lib/"
         "/usr/lib/x86_64-linux-gnu/"
-        "/home/webrtc/Downloads/ffmpeg-linux_p2p_videochannel/nasm-2.15.05/x264"
+#        "/home/webrtc/Downloads/ffmpeg-linux_p2p_videochannel/nasm-2.15.05/x264"
 
 )
 
@@ -856,6 +912,7 @@ list(APPEND avformat_srcs
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavformat/vpk.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavformat/vplayerdec.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavformat/vqf.c
+        ${CMAKE_SOURCE_DIR}/ffmpeg/libavformat/websocket.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavformat/w64.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavformat/wavdec.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavformat/wavenc.c
@@ -891,6 +948,10 @@ list(APPEND avcodec_srcs
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/v4l2_buffers.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/v4l2_fmt.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/v4l2_m2m.c
+
+        ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/allcodecs.c
+        ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/libfdk-aacenc.c
+        ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/libfdk-aacdec.c
 
 
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/012v.c
@@ -1292,7 +1353,9 @@ list(APPEND avcodec_srcs
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/lcldec.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/lclenc.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/libfdk-aacdec.c
-        ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/libfdk-aacenc.c
+        ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/libopus.c
+        ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/libopusenc.c
+        ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/libopusdec.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/libx264.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/ljpegenc.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavcodec/loco.c
@@ -1803,7 +1866,7 @@ list(APPEND avutil_srcs
 
 list(APPEND avdevice_srcs
 
-
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/wavFileReader.cpp
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavdevice/alsa.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavdevice/alsa_enc.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/libavdevice/alsa_dec.c
@@ -1836,39 +1899,63 @@ list(APPEND ffmpeg_srcs
         ${CMAKE_SOURCE_DIR}/ffmpeg/fftools/ffmpeg_hw.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/fftools/cmdutils.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/fftools/ffmpeg.c
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/custom/EncodeAudio.c
         #        ${CMAKE_SOURCE_DIR}/ffmpeg/fftools/ffplay.c
         )
 
-list(APPEND p2p_data_channel_srcs
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/DataChannel/data_channel_observer_impl.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/Engines/WebSocketEngine.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/peer_connection_observer_impl/peer_connection_observer_impl.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/UDP/DatagramSocket.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/WebSocket/WebSocketHelper.cpp
+list(APPEND audio_srcs
+
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Engines/WebSocketEngine.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/peer_connection_observer_impl/peer_connection_observer_impl.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/WebSocket/WebSocketHelper.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Audiocapturer/MyAudioCapturer.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/AntMedia/Messaging.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Audiocapturer/ringbuffer.c
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Audiocapturer/wavFileReader.cpp
+
         )
 
-list(APPEND p2p_video_channel_srcs
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Engines/WebSocketEngine.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/peer_connection_observer_impl/peer_connection_observer_impl.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/DataChannel/data_channel_observer_impl.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/WebSocket/WebSocketHelper.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Capturer/vcm_capturer.cc
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Capturer/test_video_capturer.cc
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/MyAudioCapturer.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Codec/rtcVideoEncoder.cpp
-        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Engines/WebSocketEngine.cpp
+list(APPEND video_srcs
+
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Engines/WebSocketEngine.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/peer_connection_observer_impl/peer_connection_observer_impl.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/WebSocket/WebSocketHelper.cpp
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Capturer/vcm_capturer.cc
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Capturer/test_video_capturer.cc
+        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Encoder/rtcVideoEncoder.cpp
+
         )
+
+#list(APPEND p2p_data_channel_srcs
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/DataChannel/data_channel_observer_impl.cpp
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/Engines/WebSocketEngine.cpp
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/peer_connection_observer_impl/peer_connection_observer_impl.cpp
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/UDP/DatagramSocket.cpp
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/data_backup/server/WebSocket/WebSocketHelper.cpp
+#        )
+#
+#list(APPEND p2p_video_channel_srcs
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Engines/WebSocketEngine.cpp
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/peer_connection_observer_impl/peer_connection_observer_impl.cpp
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/DataChannel/data_channel_observer_impl.cpp
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/WebSocket/WebSocketHelper.cpp
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Capturer/vcm_capturer.cc
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Capturer/test_video_capturer.cc
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/MyAudioCapturer.cpp
+#        #        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Capturer/VideoEncoder.cpp
+#        )
+
+#list(APPEND custom_srcs
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/custom/EncodeAudio.c)
 
 #add_library(p2p STATIC ${p2p_data_channel_srcs})
 #target_compile_definitions(p2p PRIVATE BUILDING_p2p)
 
-add_library(p2p STATIC ${p2p_video_channel_srcs} 
+#add_library(custom STATIC ${custom_srcs})
+#target_compile_definitions(custom PRIVATE BUILDING_custom)
 
-        # ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/wavFileReader.cpp 
-        # ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/wavFileReader.h
-        
-        )
-target_compile_definitions(p2p PRIVATE BUILDING_p2p)
+#add_library(p2p STATIC ${video_srcs})
+#target_compile_definitions(p2p PRIVATE BUILDING_p2p)
 
 add_library(avfilter STATIC ${avfilter_srcs})
 target_compile_definitions(avfilter PRIVATE BUILDING_avfilter)
@@ -1876,7 +1963,7 @@ target_compile_definitions(avfilter PRIVATE BUILDING_avfilter)
 add_library(avformat STATIC ${avformat_srcs})
 target_compile_definitions(avformat PRIVATE DBUILDING_avformat)
 
-add_library(avcodec STATIC ${avcodec_srcs} main.cpp)
+add_library(avcodec STATIC ${avcodec_srcs} main.cpp ${CMAKE_SOURCE_DIR}/ffmpeg/custom/EncodeAudio.h)
 target_compile_definitions(avcodec PRIVATE DBUILDING_avcodec)
 
 add_library(postproc STATIC ${CMAKE_SOURCE_DIR}/ffmpeg/libpostproc/postprocess.c)
@@ -1896,20 +1983,37 @@ target_compile_definitions(avdevice PRIVATE DBUILDING_avdevice)
 
 add_library(libx264 STATIC IMPORTED)
 set_target_properties(libx264 PROPERTIES IMPORTED_LOCATION
-        #        /home/webrtc/x264/libx264.a
+#                /home/webrtc/x264/libx264.a
+#        /home/webrtc/ffmpeg_build/lib/libx264.a
         ${CMAKE_SOURCE_DIR}/x264/ffmpeg_build/lib/libx264.a
         )
 
 add_library(webrtc_linux STATIC IMPORTED)
 set_target_properties(webrtc_linux PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/webrtc/src/out/Debug/obj/libwebrtc.a)
+#set_target_properties(webrtc_linux PROPERTIES IMPORTED_LOCATION /home/webrtc/lib_webrtc/src/out/Debug/obj/libwebrtc.a)
 
-add_executable(ffmpeg main.cpp ${ffmpeg_srcs}
+add_executable(ffmpeg main.cpp
 
-#        ../../../webrtc/lib_webrtc/src/media/base/video_broadcaster.cc
-#        ../../../../webrtc/lib_webrtc/src/video/video_stream_encoder.cc
-#        ../../../../webrtc/lib_webrtc/src/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc
-#        ../../../../webrtc/lib_webrtc/src/modules/audio_device/audio_device_buffer.cc
-#        ../../../../webrtc/lib_webrtc/src/audio/audio_transport_impl.cc
+        ${ffmpeg_srcs}
+        ${audio_srcs}
+        ${video_srcs}
+
+        # ../../../../webrtc/lib_webrtc/src/media/base/video_broadcaster.cc
+        # ../../../../webrtc/lib_webrtc/src/video/video_stream_encoder.cc
+        # ../../../../webrtc/lib_webrtc/src/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc
+        # ../../../../webrtc/lib_webrtc/src/modules/audio_device/audio_device_buffer.cc
+        # ../../../../webrtc/lib_webrtc/src/audio/audio_transport_impl.cc
+        # ../../../../webrtc/lib_webrtc/src/modules/audio_coding/acm2/audio_coding_module.cc
+        # ../../../../webrtc/lib_webrtc/src/audio/channel_send.cc
+        # ../../../../webrtc/lib_webrtc/src/video/transport_adapter.cc
+        # ../../../../webrtc/lib_webrtc/src/pc/rtp_transport.cc
+        # ../../../../webrtc/lib_webrtc/src/modules/rtp_rtcp/source/rtp_sender_video.cc
+        # ../../../../webrtc/lib_webrtc/src/call/rtp_video_sender.cc
+
+#        ../../../../webrtc/lib_webrtc/src/api/audio_codecs/builtin_audio_encoder_factory.cc
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/ringbuffer.h
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/ringbuffer.c
+#        ${CMAKE_SOURCE_DIR}/ffmpeg/custom/EncodeAudio.c
         )
 
 target_link_libraries(ffmpeg
@@ -1921,11 +2025,11 @@ target_link_libraries(ffmpeg
         swresample
         swscale
         avutil
-        p2p
-)
+#        p2p
+#        custom
+        )
 
-target_link_libraries(ffmpeg webrtc_linux 
-        libx264
+target_link_libraries(ffmpeg webrtc_linux libx264
         -lx264
         -lfdk-aac
         -lm
@@ -1944,7 +2048,9 @@ target_link_libraries(ffmpeg webrtc_linux
         -lssl
         -lcrypto
         -ldl
+
         -lasound
         -lsndio
         -lpulse
+        -lopus
         )

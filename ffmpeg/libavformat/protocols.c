@@ -58,6 +58,7 @@ extern const URLProtocol ff_tee_protocol;
 extern const URLProtocol ff_tcp_protocol;
 extern const URLProtocol ff_tls_protocol;
 extern const URLProtocol ff_udp_protocol;
+extern const URLProtocol ff_ws_protocol;
 extern const URLProtocol ff_udplite_protocol;
 extern const URLProtocol ff_unix_protocol;
 extern const URLProtocol ff_librtmp_protocol;

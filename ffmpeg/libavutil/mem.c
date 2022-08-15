@@ -248,6 +248,10 @@ void *av_calloc(size_t nmemb, size_t size)
     return av_mallocz(nmemb * size);
 }
 
+/*TODO in av_strdup(); need to modify this code such that it
+ * checks if s->url contains 'ws' requirement if so then,
+ * it split ant media server url and separate stream id written
+ * at the end of the url*/
 char *av_strdup(const char *s)
 {
     char *ptr = NULL;

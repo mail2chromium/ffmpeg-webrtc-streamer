@@ -88,7 +88,7 @@ typedef struct OpusPacket {
     int stereo;                     /**< whether this packet is mono or stereo */
     int vbr;                        /**< vbr flag */
     int config;                     /**< configuration: tells the audio mode,
-                                     **                bandwidth, and frame duration */
+                                     **bandwidth, and frame duration */
     int frame_count;                /**< frame count */
     int frame_offset[MAX_FRAMES];   /**< frame offsets */
     int frame_size[MAX_FRAMES];     /**< frame sizes */

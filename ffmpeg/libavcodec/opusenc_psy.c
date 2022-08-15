@@ -86,12 +86,12 @@ static void step_collect_psy_metrics(OpusPsyContext *s, int index)
     for (ch = 0; ch < s->avctx->channels; ch++) {
         const int lap_size = (1 << s->bsize_analysis);
         for (i = 1; i <= FFMIN(lap_size, index); i++) {
-            const int offset = i*120;
+            const int offset = i*120; //TODO; 120
             AVFrame *cur = ff_bufqueue_peek(s->bufqueue, index - i);
             memcpy(&s->scratch[offset], cur->extended_data[ch], cur->nb_samples*sizeof(float));
         }
         for (i = 0; i < lap_size; i++) {
-            const int offset = i*120 + lap_size;
+            const int offset = i*120 + lap_size; //TODO; 120
             AVFrame *cur = ff_bufqueue_peek(s->bufqueue, index + i);
             memcpy(&s->scratch[offset], cur->extended_data[ch], cur->nb_samples*sizeof(float));
         }

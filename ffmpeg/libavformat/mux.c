@@ -40,6 +40,7 @@
 #include "audiointerleave.h"
 #include "url.h"
 #include <stdarg.h>
+#include <string.h>
 #if CONFIG_NETWORK
 #include "network.h"
 #endif
@@ -145,6 +146,7 @@ enum AVChromaLocation ff_choose_chroma_location(AVFormatContext *s, AVStream *st
 
 }
 
+//TODO @ avformat_alloc_output_context2() for 'ws'
 int avformat_alloc_output_context2(AVFormatContext **avctx, AVOutputFormat *oformat,
                                    const char *format, const char *filename)
 {
@@ -196,6 +198,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
             goto nomem;
 
     }
+
     *avctx = s;
     return 0;
 nomem:
