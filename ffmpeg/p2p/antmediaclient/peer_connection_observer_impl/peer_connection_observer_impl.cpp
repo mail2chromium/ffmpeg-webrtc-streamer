@@ -5,6 +5,7 @@
 #include <nlohmann/json.hpp>
 #include "peer_connection_observer_impl.h"
 #include "../WebSocket/WebSocketHelper.h"
+#include <test/video_renderer.h>
 
 //headers for write video to file
 //#include <Windows.h>
@@ -68,7 +69,8 @@ void peerconnectionobserverimpl::OnIceCandidate(const webrtc::IceCandidateInterf
     message_object["candidate"] = candidate_str;
     message_object["id"] = candidate->sdp_mid();
     message_object["label"] = candidate->sdp_mline_index();
-    AntMediaWSTrasport.send(websocket_connection_handler, message_object.dump(), websocketpp::frame::opcode::value::text);
+    AntMediaWSTrasport.send(websocket_connection_handler, message_object.dump(),
+                            websocketpp::frame::opcode::value::text);
 
 }
 
@@ -416,7 +418,7 @@ void receiveFromOpenCV() {
 }
 */
 void peerconnectionobserverimpl::OnDataChannel(rtc::scoped_refptr<webrtc::DataChannelInterface> channel) {
-    cout << "ondatachannel" ;
+    cout << "ondatachannel";
     data_channel = channel;
 //    data_channel->RegisterObserver(&data_channel_observer);
 }
@@ -456,9 +458,16 @@ void peerconnectionobserverimpl::OnIceConnectionChange(webrtc::PeerConnectionInt
 void peerconnectionobserverimpl::OnAddStream(rtc::scoped_refptr<webrtc::MediaStreamInterface> stream) {
     RTC_LOG(LS_NONE) << "OnAddStream\n";
     video_track = stream->GetVideoTracks()[0];
-    RTC_LOG(LS_NONE) << ToString(video_track.get());
-    rtc::VideoSinkWants wants;
-//    video_track->AddOrUpdateSink(&video_sink, wants);
+    auto audio = stream->GetAudioTracks()[0];
+    audio.get()->set_enabled(true);
+    RTC_LOG(LS_ERROR) << "Audio track: " << ToString(audio.get());
+    RTC_LOG(LS_ERROR) << "Video track: " << ToString(video_track.get());
+
+
+    auto video_renderer
+            = webrtc::test::VideoRenderer::Create("AntMedia: rtp_stream", 640, 480);
+    video_track->AddOrUpdateSink(video_renderer, rtc::VideoSinkWants());
+
 }
 
 void peerconnectionobserverimpl::OnTrack(rtc::scoped_refptr<webrtc::RtpTransceiverInterface> transceiver) {

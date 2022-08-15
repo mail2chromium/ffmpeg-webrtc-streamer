@@ -15,30 +15,34 @@
 #include "api/video/video_sink_interface.h"
 
 namespace webrtc {
-class VideoFrame;
+    class VideoFrame;
 
-namespace test {
-class VideoRenderer : public rtc::VideoSinkInterface<VideoFrame> {
- public:
-  // Creates a platform-specific renderer if possible, or a null implementation
-  // if failing.
-  static VideoRenderer* Create(const char* window_title,
-                               size_t width,
-                               size_t height);
-  // Returns a renderer rendering to a platform specific window if possible,
-  // NULL if none can be created.
-  // Creates a platform-specific renderer if possible, returns NULL if a
-  // platform renderer could not be created. This occurs, for instance, when
-  // running without an X environment on Linux.
-  static VideoRenderer* CreatePlatformRenderer(const char* window_title,
-                                               size_t width,
-                                               size_t height);
-  virtual ~VideoRenderer() {}
+    namespace test {
+        class VideoRenderer : public rtc::VideoSinkInterface<VideoFrame> {
+        public:
+            // Creates a platform-specific renderer if possible, or a null implementation
+            // if failing.
+            static VideoRenderer *Create(const char *window_title,
+                                         size_t width,
+                                         size_t height);
 
- protected:
-  VideoRenderer() {}
-};
-}  // namespace test
+            // Returns a renderer rendering to a platform specific window if possible,
+            // NULL if none can be created.
+            // Creates a platform-specific renderer if possible, returns NULL if a
+            // platform renderer could not be created. This occurs, for instance, when
+            // running without an X environment on Linux.
+            static VideoRenderer *CreatePlatformRenderer(const char *window_title,
+                                                         size_t width,
+                                                         size_t height);
+
+    
+
+            virtual ~VideoRenderer() {}
+
+        protected:
+            VideoRenderer() {}
+        };
+    }  // namespace test
 }  // namespace webrtc
 
 #endif  // TEST_VIDEO_RENDERER_H_

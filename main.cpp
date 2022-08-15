@@ -11,6 +11,7 @@
 
 extern "C" {
 #include "fftools/ffmpeg.h"
+#include "fftools/ffplay.h"
 }
 
 #include <iostream>
@@ -22,17 +23,24 @@ extern "C" {
 extern string local_web_url;
 extern string local_stream_id;
 
-static int f(char const **p, char const *q, size_t nmemb)
-{
+//using namespace std;
+//wavFileReader *wavFileReader::instance = 0;
+//static void readAudio(rtc::scoped_refptr<MyAudioCapturer> AudioCapturer) {
+////    while (true) {
+//    wavFileReader::getinstance()->readFile(AudioCapturer);
+////        sleep(5);
+////    }
+//}
+
+static int f(char const **p, char const *q, size_t nmemb) {
     for (size_t i = 0; i < nmemb; ++i)
         if (strstr(p[i], q) != NULL)
             return i;
     return 0;
 }
 
-typedef enum
-{
-    GET_DELIM_OK=0,
+typedef enum {
+    GET_DELIM_OK = 0,
     GET_DELIM_NOT_FOUND_DELIM,
     GET_DELIM_PREFIX_TOO_LONG,
     GET_ID_PREFIX_TOO_LONG
@@ -46,28 +54,26 @@ typedef enum
  * @param dst_size size of buffer dst
  */
 
-static GET_DELIM_RESULT split_(const char** pbuf, const char* delim, char* dst, char* id, int dst_size, int id_size)
-{
-    const char* sub = strstr(*pbuf,delim);
-    if(sub==NULL)
+static GET_DELIM_RESULT split_(const char **pbuf, const char *delim, char *dst, char *id, int dst_size, int id_size) {
+    const char *sub = strstr(*pbuf, delim);
+    if (sub == NULL)
         return GET_DELIM_NOT_FOUND_DELIM;
-    else
-    {
-        int prefix_len = sub-(*pbuf);
-        if(prefix_len+1>dst_size)
+    else {
+        int prefix_len = sub - (*pbuf);
+        if (prefix_len + 1 > dst_size)
             return GET_DELIM_PREFIX_TOO_LONG;
         // strncat requires dst to be null-terminated
-        *dst=0;
-        strncat(dst,*pbuf,prefix_len);
-        *pbuf+=prefix_len+strlen(delim);
+        *dst = 0;
+        strncat(dst, *pbuf, prefix_len);
+        *pbuf += prefix_len + strlen(delim);
 
-        *id=0;
-        int id_length = strlen(*pbuf)-(prefix_len+strlen(delim));
-        if(id_length+1>id_size)
+        *id = 0;
+        int id_length = strlen(*pbuf) - (prefix_len + strlen(delim));
+        if (id_length + 1 > id_size)
             return GET_ID_PREFIX_TOO_LONG;
 
-        strncat(id,*pbuf,id_length);
-        *pbuf+=id_length;
+        strncat(id, *pbuf, id_length);
+        *pbuf += id_length;
 
         return GET_DELIM_OK;
     }
@@ -169,8 +175,8 @@ static GET_DELIM_RESULT split_(const char** pbuf, const char* delim, char* dst, 
 //    };
 
 ///////// For Raw Audio and Video Publishing through AntMedia ///////////////////
-//    int argc = 39;
-//    char* argv[39] = {
+//    int argc = 40;
+//    char* argv[40] = {
 //                        "ffmpeg","-re", "-y","-f","pulse",
 //                        "-i", "default", "-channel_layout", "stereo",
 //                        "-f","v4l2", "-i",
@@ -179,9 +185,8 @@ static GET_DELIM_RESULT split_(const char** pbuf, const char* delim, char* dst, 
 //                        "rawvideo", "-ac", "1","-sample_rate", "48000", "-b:a", "32000",
 //                        "-ab", "32000","-input_format","yuv420p",
 //                        "-update", "1", "-preset", "ultrafast",
-//                        "a.yuv","b.wav"
-////                        "-f", "mpegts",
-////                        "ws://localhost:5080/WebRTCAppEE/websocket/id=stream_local"
+//                        "-f", "mpegts",
+//                        "ws://localhost:5080/WebRTCAppEE/websocket/id=stream_local"
 //                    };
 
 ///////// For Pre-Encoded Audio and Video Publishing through AntMedia ///////////////////
@@ -198,6 +203,19 @@ static GET_DELIM_RESULT split_(const char** pbuf, const char* delim, char* dst, 
 //                        "ws://localhost:5080/WebRTCAppEE/websocket/id=stream_local"
 //                    };
 
+////// Video player command through Websocket //////////
+//    int argc = 2;
+//    char *argv[2] = {
+//            "ffplay",
+//            "ws://localhost:5080/WebRTCAppEE/websocket/id=rtp_stream"
+//    };
+
+//    int argc = 2;
+//    char *argv[2] = {
+//            "ffplay",
+//            "ws://localhost:5080/WebRTCAppEE/websocket/id=rtp_stream"
+//    };
+
 int main(int argc, char** argv) {
 
     /*TODO; check if filename constains 'ws' prefix, if so then
@@ -205,9 +223,9 @@ int main(int argc, char** argv) {
     char filename_[100];
     char streamID[100];
 
-    int indx = f((const char**)(argv), "ws:", argc);
+    int indx = f((const char **) (argv), "ws:", argc);
 
-    if(indx) {
+    if (indx) {
         //'ws' prefix is set in filename
         av_log(NULL, AV_LOG_INFO, "Requested to stream via websocket %s\n", argv[indx]);
 
@@ -216,59 +234,57 @@ int main(int argc, char** argv) {
 
         rc = split_(&pbuf, "/id=", filename_, streamID, 100, 100);
 
-        if(rc == GET_DELIM_OK) {
+        if (rc == GET_DELIM_OK) {
             RTC_LOG(LS_INFO) << "given websocket url contains URL=" << filename_ << " and StreamID=" << streamID;
             string url_(filename_), id_(streamID);
             local_web_url = url_;
             local_stream_id = id_;
-        }
-        else {
+        } else {
             RTC_LOG(LS_INFO) << "got error, revisit command" << argv[indx];
             return 0;
         }
 
-    }
-    else {
+    } else {
         local_web_url = ANT_MEDIA_SERVER_URL_LOCAL;
         local_stream_id = LOCAL_STREAM_ID;
     }
 
-    int IsBitRate4VideoSet = f((const char**)(argv), "-b:v", argc);
-    int IsBitRate4AudioSet = f((const char**)(argv), "-b:a", argc);
-    int IsCodec4VideoSet   = f((const char**)(argv), "-vcodec", argc);
-    int IsRaw4VideoSet     = f((const char**)(argv), "-c:v", argc);
-    int IsCodec4AudioSet   = f((const char**)(argv), "-strict", argc);
-
-    if(!IsRaw4VideoSet)
-        WebSocketHelper::raw_data = 0;
-    else
-        WebSocketHelper::raw_data = 1;
-
-    if(IsCodec4VideoSet)
-        VideoCodecIsRequested = true;
-
-    if(IsCodec4AudioSet)
-        AudioCodeIsRequested = true;
-
-    if(IsBitRate4AudioSet)
-        RequestedAudioTrack = true;
-
-    if(IsBitRate4VideoSet)
-        RequestedVideoTrack = true;
-
-    if(IsBitRate4AudioSet) {
+//    int IsBitRate4VideoSet = f((const char**)(argv), "-b:v", argc);
+//    int IsBitRate4AudioSet = f((const char**)(argv), "-b:a", argc);
+//    int IsCodec4VideoSet   = f((const char**)(argv), "-vcodec", argc);
+//    int IsRaw4VideoSet     = f((const char**)(argv), "-c:v", argc);
+//    int IsCodec4AudioSet   = f((const char**)(argv), "-strict", argc);
+//
+//    if(!IsRaw4VideoSet)
+//        WebSocketHelper::raw_data = 0;
+//    else
+//        WebSocketHelper::raw_data = 1;
+//
+//    if(IsCodec4VideoSet)
+//        VideoCodecIsRequested = true;
+//
+//    if(IsCodec4AudioSet)
+//        AudioCodeIsRequested = true;
+//
+//    if(IsBitRate4AudioSet)
+//        RequestedAudioTrack = true;
+//
+//    if(IsBitRate4VideoSet)
+//        RequestedVideoTrack = true;
+//
+//    if(IsBitRate4AudioSet) {
 //        AudioCapturer = new rtc::RefCountedObject<MyAudioCapturer>();
 //        AudioCapturer->Init();
 //        AudioCapturer->InitRecording();
-    }
+//    }
 
-    thread th2(&ffmpeg_main, argc, argv);
+    thread th2(&ffplay_main, argc, argv);
 
     WebSocketEngine::getInstance()->init(local_web_url, local_stream_id);
 
     th2.join();
 
-    fclose(outfile);
+//    fclose(outfile);
 
 /////////////////////////
 

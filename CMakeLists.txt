@@ -77,7 +77,10 @@ include_directories(
         "/usr/include/"
         "/usr/include/alsa/"
         "/usr/include/pulse/"
-        "/usr/include/opus"
+        "/usr/include/opus/"
+        "/usr/include/SDL/"
+        "/usr/include/SDL2/"
+
 
         "${CMAKE_SOURCE_DIR}/ffmpeg"
         "${CMAKE_SOURCE_DIR}x264/ffmpeg_build"
@@ -110,19 +113,20 @@ include_directories(
         "${CMAKE_SOURCE_DIR}/webrtc/src/pc"
 
         "${CMAKE_SOURCE_DIR}/ffmpeg"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Codec"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Codec"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server"
         "${CMAKE_SOURCE_DIR}/ffmpeg/p2p"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Audiocapturer/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Engines/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/peer_connection_observer_impl/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/src/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/WebSocket/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/AntMedia/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Capturer/"
-        "${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Encoder/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Audiocapturer/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Engines/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/peer_connection_observer_impl/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/src/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/WebSocket/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/AntMedia/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Capturer/"
+        "${CMAKE_SOURCE_DIR}/ffmpeg/${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Encoder/"
 
-#        "/custom"
+
+        #        "/custom"
 #        "ffmpeg-example/include/compat/"
 #
 #        "/home/webrtc/lib_webrtc/src"
@@ -139,6 +143,7 @@ include_directories(
 #
 #        "/home/webrtc/lib_webrtc/src"
 #        "/home/webrtc/lib_webrtc/test"
+#        "/home/webrtc/lib_webrtc/test/linux"
 #        "/home/webrtc/lib_webrtc/src/build/out/debug/x64/obj"
 #        "/home/webrtc/lib_webrtc/src/third_party/abseil-cpp"
 #        "/home/webrtc/lib_webrtc/src/third_party/googletest/src/googletest/include"
@@ -171,7 +176,7 @@ include_directories(
         "/usr/include/"
         "/usr/local/lib/"
         "/usr/lib/x86_64-linux-gnu/"
-#        "/home/webrtc/Downloads/ffmpeg-linux_p2p_videochannel/nasm-2.15.05/x264"
+        "/home/webrtc/Downloads/ffmpeg-linux_p2p_videochannel/nasm-2.15.05/x264"
 
 )
 
@@ -1900,7 +1905,7 @@ list(APPEND ffmpeg_srcs
         ${CMAKE_SOURCE_DIR}/ffmpeg/fftools/cmdutils.c
         ${CMAKE_SOURCE_DIR}/ffmpeg/fftools/ffmpeg.c
 #        ${CMAKE_SOURCE_DIR}/ffmpeg/custom/EncodeAudio.c
-        #        ${CMAKE_SOURCE_DIR}/ffmpeg/fftools/ffplay.c
+        ${CMAKE_SOURCE_DIR}/ffmpeg/fftools/ffplay.c
         )
 
 list(APPEND audio_srcs
@@ -1923,6 +1928,12 @@ list(APPEND video_srcs
         ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Capturer/vcm_capturer.cc
         ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Capturer/test_video_capturer.cc
         ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/antmediaclient/Encoder/rtcVideoEncoder.cpp
+
+
+        "${CMAKE_SOURCE_DIR}/webrtc/src/test/video_renderer.cc"
+        "${CMAKE_SOURCE_DIR}/webrtc/src/test/linux/video_renderer_linux.cc"
+        "${CMAKE_SOURCE_DIR}/webrtc/src/test/linux/glx_renderer.cc"
+        "${CMAKE_SOURCE_DIR}/webrtc/src/test/gl/gl_renderer.cc"
 
         )
 
@@ -1990,25 +2001,26 @@ set_target_properties(libx264 PROPERTIES IMPORTED_LOCATION
 
 add_library(webrtc_linux STATIC IMPORTED)
 set_target_properties(webrtc_linux PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/webrtc/src/out/Debug/obj/libwebrtc.a)
+
 #set_target_properties(webrtc_linux PROPERTIES IMPORTED_LOCATION /home/webrtc/lib_webrtc/src/out/Debug/obj/libwebrtc.a)
 
-add_executable(ffmpeg main.cpp
+add_executable(ffplay main.cpp
 
         ${ffmpeg_srcs}
         ${audio_srcs}
         ${video_srcs}
 
-        # ../../../../webrtc/lib_webrtc/src/media/base/video_broadcaster.cc
-        # ../../../../webrtc/lib_webrtc/src/video/video_stream_encoder.cc
-        # ../../../../webrtc/lib_webrtc/src/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc
-        # ../../../../webrtc/lib_webrtc/src/modules/audio_device/audio_device_buffer.cc
-        # ../../../../webrtc/lib_webrtc/src/audio/audio_transport_impl.cc
-        # ../../../../webrtc/lib_webrtc/src/modules/audio_coding/acm2/audio_coding_module.cc
-        # ../../../../webrtc/lib_webrtc/src/audio/channel_send.cc
-        # ../../../../webrtc/lib_webrtc/src/video/transport_adapter.cc
-        # ../../../../webrtc/lib_webrtc/src/pc/rtp_transport.cc
-        # ../../../../webrtc/lib_webrtc/src/modules/rtp_rtcp/source/rtp_sender_video.cc
-        # ../../../../webrtc/lib_webrtc/src/call/rtp_video_sender.cc
+#        ../../../../webrtc/lib_webrtc/src/media/base/video_broadcaster.cc
+#        ../../../../webrtc/lib_webrtc/src/video/video_stream_encoder.cc
+#        ../../../../webrtc/lib_webrtc/src/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc
+#        ../../../../webrtc/lib_webrtc/src/modules/audio_device/audio_device_buffer.cc
+#        ../../../../webrtc/lib_webrtc/src/audio/audio_transport_impl.cc
+#        ../../../../webrtc/lib_webrtc/src/modules/audio_coding/acm2/audio_coding_module.cc
+#        ../../../../webrtc/lib_webrtc/src/audio/channel_send.cc
+#        ../../../../webrtc/lib_webrtc/src/video/transport_adapter.cc
+#        ../../../../webrtc/lib_webrtc/src/pc/rtp_transport.cc
+#        ../../../../webrtc/lib_webrtc/src/modules/rtp_rtcp/source/rtp_sender_video.cc
+#        ../../../../webrtc/lib_webrtc/src/call/rtp_video_sender.cc
 
 #        ../../../../webrtc/lib_webrtc/src/api/audio_codecs/builtin_audio_encoder_factory.cc
 #        ${CMAKE_SOURCE_DIR}/ffmpeg/p2p/server/Audiocapturer/ringbuffer.h
@@ -2016,7 +2028,7 @@ add_executable(ffmpeg main.cpp
 #        ${CMAKE_SOURCE_DIR}/ffmpeg/custom/EncodeAudio.c
         )
 
-target_link_libraries(ffmpeg
+target_link_libraries(ffplay
         postproc
         avformat
         avdevice
@@ -2029,7 +2041,7 @@ target_link_libraries(ffmpeg
 #        custom
         )
 
-target_link_libraries(ffmpeg webrtc_linux libx264
+target_link_libraries(ffplay webrtc_linux libx264
         -lx264
         -lfdk-aac
         -lm
@@ -2053,4 +2065,8 @@ target_link_libraries(ffmpeg webrtc_linux libx264
         -lsndio
         -lpulse
         -lopus
+        -lSDL2
+        -lX11
+        -lGL
+
         )
