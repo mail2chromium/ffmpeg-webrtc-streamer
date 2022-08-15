@@ -1,11 +1,13 @@
 # ffmpeg-webrtc-streamer
 Stream FFMPEG based Audio and Video using WebRtc. It is the most fastest P2P based streamer which gets Audio and Video from FFMPEG and then stream it to **WebRtc Endpoints** (Android, iOS, Web) and **Media Servers** like *Ant-Media*.
 
+#### Important Note:
+   **To get better results, Please test this on local deployed AntMedia Server.**
 
 ## Quick Usage:
 -----
 
-If you are running this first time. Just run the following commands to get executables. To get better results, Please test this on local deployed AntMedia Server.
+If you are running this first time. Just run the following commands to get executables. 
 
 ## For AntMedia Publisher:
 
@@ -64,7 +66,7 @@ If you are running this first time. Just run the following commands to get execu
 
 ```
 
-### Run Scriber:
+### Run Subscriber:
 
 ```
   $ cd build/
